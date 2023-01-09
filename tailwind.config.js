@@ -5,7 +5,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        orangeWhite: "#DDCCAA",
+      },
+      backgroundImage: {
+        interstellar: 'url("/image1.png")',
+        tenenbaum: 'url("/image3.png")',
+        rings: 'url("/image2.png")',
+      },
+    },
   },
   plugins: [],
 };
