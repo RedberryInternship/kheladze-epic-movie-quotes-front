@@ -1,36 +1,48 @@
 import { LandingHeader, LandingQuote, RedBtn, Register } from "components";
+import { useRouter } from "next/router";
+import { en, ka } from "lang";
 
 import { useState } from "react";
 
 export default function Home() {
   const [LoginModal, setLoginModal] = useState(false);
   const [singUpModal, setSingUpModal] = useState(false);
+  const { locale, ...rest } = useRouter();
+  const {
+    get_started,
+    interstellar,
+    interstellar_name,
+    login,
+    movie_quotes,
+    singup,
+    rings,
+    rings_name,
+    tenenbaum,
+    tenenbaum_name,
+    title,
+  } = locale === "en" ? en : ka;
 
   return (
     <div className="bg-neutral-900">
-      <LandingHeader />
+      <LandingHeader labels={{ movie_quotes, singup, login }} />
       <Register />
       <div className="h-screen flex flex-col items-center justify-center md:gap-8">
         <header className="text-orangeWhite font-bold text-2xl md:text-6xl text-center">
-          Find any quote in <br /> millions of movie lines
+          {title}
         </header>
-        <RedBtn label="Get started" />
+        <RedBtn label={get_started} />
       </div>
       <LandingQuote
         background={"bg-interstellar"}
-        quote="You have to leave somethig behind to go forward"
-        movie="Interstellar, 2014"
+        quote={interstellar}
+        movie={interstellar_name}
       />
       <LandingQuote
         background={"bg-tenenbaum"}
-        quote="I think we are just gonna have to be secretly in love with earch other and leave it that"
-        movie="The Royal Tenenbaums, 2001"
+        quote={tenenbaum}
+        movie={tenenbaum_name}
       />
-      <LandingQuote
-        background={"bg-rings"}
-        quote="I see in your eyes the same fear that would take the heart of me...."
-        movie="The Lord of the Rings, 2003"
-      />
+      <LandingQuote background={"bg-rings"} quote={rings} movie={rings_name} />
     </div>
   );
 }

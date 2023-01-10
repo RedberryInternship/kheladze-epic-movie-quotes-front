@@ -1,0 +1,1 @@
+export { default as LangArrow } from './LangArrow';

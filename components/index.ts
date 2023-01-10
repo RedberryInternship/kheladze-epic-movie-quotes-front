@@ -1,3 +1,5 @@
 export * from './landing'
 export * from './modals'
 export * from './buttons'
+export * from './langDropdown'
+export * from './icons'
