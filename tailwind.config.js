@@ -14,6 +14,13 @@ module.exports = {
         tenenbaum: 'url("/image3.png")',
         rings: 'url("/image2.png")',
       },
+      width: {
+        601: "37.5625rem",
+        360: "22.5rem",
+      },
+      height: {
+        704: "44rem",
+      },
     },
   },
   plugins: [],

@@ -1,7 +1,16 @@
-import { LandingHeader, LandingQuote, RedBtn, Register } from "components";
-import { useRouter } from "next/router";
-import { en, ka } from "lang";
+import {
+  LandingHeader,
+  LandingQuote,
+  RedBtn,
+  ModalWrapper,
+  RegisterForm,
+  Close,
+  LoginForm,
+} from "components";
 
+import { landingEn, landingKa } from "lang";
+
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Home() {
@@ -20,17 +29,49 @@ export default function Home() {
     tenenbaum,
     tenenbaum_name,
     title,
-  } = locale === "en" ? en : ka;
+  } = locale === "en" ? landingEn : landingKa;
 
   return (
     <div className="bg-neutral-900">
-      <LandingHeader labels={{ movie_quotes, singup, login }} />
-      <Register />
+      <LandingHeader
+        login={() => setLoginModal(true)}
+        singup={() => setSingUpModal(true)}
+        labels={{ movie_quotes, singup, login }}
+      />
+      {singUpModal && (
+        <ModalWrapper
+          className="md:h-704"
+          closeModal={() => setSingUpModal(false)}
+        >
+          <Close click={() => setSingUpModal(false)} />
+          <RegisterForm
+            loginClick={() => {
+              setSingUpModal(false);
+              setLoginModal(true);
+            }}
+          />
+        </ModalWrapper>
+      )}
+      {LoginModal && (
+        <ModalWrapper
+          className="md:h-704"
+          closeModal={() => setLoginModal(false)}
+        >
+          <Close click={() => setLoginModal(false)} />
+          <LoginForm
+            singupClick={() => {
+              setLoginModal(false);
+              setSingUpModal(true);
+            }}
+          />
+        </ModalWrapper>
+      )}
+
       <div className="h-screen flex flex-col items-center justify-center md:gap-8">
         <header className="text-orangeWhite font-bold text-2xl md:text-6xl text-center">
           {title}
         </header>
-        <RedBtn label={get_started} />
+        <RedBtn click={() => setSingUpModal(true)} label={get_started} />
       </div>
       <LandingQuote
         background={"bg-interstellar"}

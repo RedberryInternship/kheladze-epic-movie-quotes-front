@@ -1,0 +1,22 @@
+{
+  "create_acc": "შექმენით ანგარიში",
+  "start_journey": "დაიწყეთ მოგზაურობა!",
+  "name": "სახელი",
+  "name_placeholder": "მინიმუმ 3 & მაქსიმუმ 15 ასო",
+  "email": "მეილი",
+  "email_placeholder": "შეიყვანეთ მეილი",
+  "password": "პაროლი",
+  "password_placeholder": "მინიმუმ 8 & მაქსიმუმ 15 ასო",
+  "conf_pass": "დაადასტურეთ პაროლი",
+  "google": "გუგლით შესვლა",
+  "already_have": "უკვე გაქვთ ანგარიში?",
+  "get_started": "დაწყება",
+  "remember": "დაიმახსოვრე",
+  "forgot_password": "დაგავიწყდა პაროლი",
+  "singup": "რეგისტრაცია",
+  "login": "შესვლა",
+  "singin": "შესვლა",
+  "login_in_account": "შედით თქვენს ანგარიშზე",
+  "dont_have_account": "არ გაქვთ ანგარიში",
+  "welcome_back": "კეთილი იყოს თქვენი დაბრუნება! გთხოვთ შეიყვანეთ მონაცემები"
+}
