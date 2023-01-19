@@ -6,6 +6,8 @@ import {
   RegisterForm,
   Close,
   LoginForm,
+  CheckedActivated,
+  Sent,
 } from "components";
 
 import { landingEn, landingKa } from "lang";
@@ -16,7 +18,9 @@ import { useState } from "react";
 export default function Home() {
   const [LoginModal, setLoginModal] = useState(false);
   const [singUpModal, setSingUpModal] = useState(false);
-  const { locale, ...rest } = useRouter();
+  const [checkEmailModal, setCheckEmailModal] = useState(false);
+  const [toMail, setToMail] = useState("");
+  const { locale, query, push, ...rest } = useRouter();
   const {
     get_started,
     interstellar,
@@ -29,6 +33,11 @@ export default function Home() {
     tenenbaum,
     tenenbaum_name,
     title,
+    activated,
+    go_to_feed,
+    thank_you,
+    check_email,
+    go_to_mail,
   } = locale === "en" ? landingEn : landingKa;
 
   return (
@@ -45,6 +54,11 @@ export default function Home() {
         >
           <Close click={() => setSingUpModal(false)} />
           <RegisterForm
+            succesSubmit={(linkTo: string) => {
+              setCheckEmailModal(true);
+              setToMail(linkTo);
+              setSingUpModal(false);
+            }}
             loginClick={() => {
               setSingUpModal(false);
               setLoginModal(true);
@@ -64,6 +78,33 @@ export default function Home() {
               setSingUpModal(true);
             }}
           />
+        </ModalWrapper>
+      )}
+
+      {query.account_activated && (
+        <ModalWrapper
+          className="h-96 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
+          closeModal={() => push("/")}
+        >
+          <CheckedActivated />
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {thank_you}
+          </h1>
+          <h3 className="text-white">{activated}</h3>
+          <RedBtn className="w-48" label={go_to_feed} />
+        </ModalWrapper>
+      )}
+      {checkEmailModal && (
+        <ModalWrapper
+          className="h-96 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
+          closeModal={() => setCheckEmailModal(false)}
+        >
+          <Sent />
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {thank_you}
+          </h1>
+          <h3 className="text-white w-2/3 text-center">{check_email}</h3>
+          <RedBtn link={toMail} className="w-48" label={go_to_mail} />
         </ModalWrapper>
       )}
 

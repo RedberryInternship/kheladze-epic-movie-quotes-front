@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { instance } from "services";
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
   const { locale } = useRouter();
@@ -32,7 +33,10 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     resolver: yupResolver(loginValidationSchema),
   });
   const onFormSubmit = (formData: any) => {
-    console.log(formData);
+    instance
+      .post("/login", formData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -47,7 +51,7 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
       >
         <Input
           name="email"
-          type="email"
+          type="text"
           placeholder={email_placeholder}
           register={register("email")}
           error={errors.email}

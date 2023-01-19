@@ -1,7 +1,7 @@
 const ErrorInput = () => {
   return (
     <svg
-      className="absolute right-7 bottom-2"
+      className="absolute right-7 top-10"
       width="18"
       height="18"
       viewBox="0 0 18 18"

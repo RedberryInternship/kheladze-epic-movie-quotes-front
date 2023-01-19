@@ -6,9 +6,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { instance } from "services";
+import { useState } from "react";
 
-const RegisterForm: React.FC<{ loginClick: () => void }> = ({ loginClick }) => {
+const RegisterForm: React.FC<{
+  loginClick: () => void;
+  succesSubmit: (linkTo: string) => void;
+}> = ({ loginClick, succesSubmit }) => {
   const { locale } = useRouter();
+
+  const [backErrors, setBackErrors] = useState({
+    name: "",
+    email: "",
+  });
+
   const {
     already_have,
     conf_pass,
@@ -37,8 +48,15 @@ const RegisterForm: React.FC<{ loginClick: () => void }> = ({ loginClick }) => {
   });
   const onFormSubmit = (formData: any) => {
     console.log(formData);
+    instance
+      .post("/register", formData)
+      .then((res) => {
+        succesSubmit(formData.email.split("@")[1]);
+        console.log(res);
+      })
+      .catch((err) => setBackErrors(err.response.data.errors));
   };
-
+  console.log(backErrors);
   return (
     <div className="flex flex-col items-center text-white">
       <h1 className="text-2xl md:text-4xl font-medium mt-10 mb-3 md:mt-14">
@@ -57,6 +75,7 @@ const RegisterForm: React.FC<{ loginClick: () => void }> = ({ loginClick }) => {
           error={errors.name}
           label={name}
           isDirty={dirtyFields.name}
+          backErr={backErrors.name}
         />
         <Input
           name="email"
@@ -66,6 +85,7 @@ const RegisterForm: React.FC<{ loginClick: () => void }> = ({ loginClick }) => {
           error={errors.email}
           label={email}
           isDirty={dirtyFields.email}
+          backErr={backErrors.email}
         />
         <Input
           name="password"
