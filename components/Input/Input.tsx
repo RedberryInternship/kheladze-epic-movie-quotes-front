@@ -1,5 +1,6 @@
 import { CheckedInput, ErrorInput, Eye, HiddenEye } from "components/icons";
 import { useState } from "react";
+import { FieldError } from "react-hook-form";
 
 const Input: React.FC<{
   name: string;
@@ -7,9 +8,19 @@ const Input: React.FC<{
   label: string;
   placeholder: string;
   register: any;
-  error?: {};
+  error?: any;
   isDirty?: boolean;
-}> = ({ name, type, label, placeholder, register, error, isDirty }) => {
+  backErr?: string;
+}> = ({
+  name,
+  type,
+  label,
+  placeholder,
+  register,
+  error,
+  isDirty,
+  backErr,
+}) => {
   const [toggle, setToggle] = useState(type);
   let showError = false;
   if (isDirty && !error) {
@@ -23,14 +34,13 @@ const Input: React.FC<{
   }
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col pb-2 relative">
       <label className="mb-2" htmlFor={name}>
         {label}
         <span className="text-red-500"> *</span>
       </label>
       {isDirty && !showError && <CheckedInput />}
 
-      {showError && <ErrorInput />}
       <input
         className={`focus:outline-none focus:ring-1 focus:border-blue-300 border box-border text-gray-800 rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
@@ -41,6 +51,18 @@ const Input: React.FC<{
         placeholder={placeholder}
         {...register}
       />
+      {showError && (
+        <>
+          <ErrorInput />
+          <p className="absolute text-sm -bottom-3 text-red-500">
+            {error?.message}
+          </p>
+        </>
+      )}
+      {backErr && (
+        <p className="absolute text-sm -bottom-3 text-red-500">{backErr}</p>
+      )}
+
       {type === "password" && (
         <div
           className="absolute right-1 bottom-2 cursor-pointer"
@@ -55,8 +77,6 @@ const Input: React.FC<{
           {toggle === "password" ? <HiddenEye /> : <Eye />}
         </div>
       )}
-
-      {/* <p className="h-5 text-orange-600">{ error.message}</p> */}
     </div>
   );
 };

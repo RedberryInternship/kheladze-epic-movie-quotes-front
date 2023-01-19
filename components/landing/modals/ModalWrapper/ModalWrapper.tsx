@@ -2,7 +2,7 @@ import React from "react";
 import { Backdrop } from "components";
 
 const ModalWrapper: React.FC<{
-  closeModal: () => void;
+  closeModal?: () => void;
   children: any;
   className?: string;
 }> = ({ closeModal, children, className }) => {
