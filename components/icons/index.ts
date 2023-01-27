@@ -7,3 +7,8 @@ export { default as Close } from "./Close";
 export { default as Google } from "./Google";
 export { default as CheckedActivated } from "./CheckedActivated";
 export { default as Sent } from "./Sent";
+export { default as Burger } from "./Burger";
+export { default as Search } from "./Search";
+export { default as Ring } from "./Ring";
+export { default as HomeIcon } from "./HomeIcon";
+export { default as Camera } from "./Camera";

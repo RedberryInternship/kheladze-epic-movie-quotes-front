@@ -49,7 +49,7 @@ export default function Home() {
       />
       {singUpModal && (
         <ModalWrapper
-          className="md:h-704"
+          className="md:h-704 h-screen w-screen"
           closeModal={() => setSingUpModal(false)}
         >
           <Close click={() => setSingUpModal(false)} />
@@ -68,7 +68,7 @@ export default function Home() {
       )}
       {LoginModal && (
         <ModalWrapper
-          className="md:h-704"
+          className="md:h-704 h-screen w-screen"
           closeModal={() => setLoginModal(false)}
         >
           <Close click={() => setLoginModal(false)} />
@@ -91,12 +91,19 @@ export default function Home() {
             {thank_you}
           </h1>
           <h3 className="text-white">{activated}</h3>
-          <RedBtn className="w-48" label={go_to_feed} />
+          <RedBtn
+            click={() => {
+              push("/");
+              setLoginModal(true);
+            }}
+            className="w-48 md:w-360"
+            label={login}
+          />
         </ModalWrapper>
       )}
       {checkEmailModal && (
         <ModalWrapper
-          className="h-96 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
+          className="h-414 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
           closeModal={() => setCheckEmailModal(false)}
         >
           <Sent />
@@ -104,7 +111,7 @@ export default function Home() {
             {thank_you}
           </h1>
           <h3 className="text-white w-2/3 text-center">{check_email}</h3>
-          <RedBtn link={toMail} className="w-48" label={go_to_mail} />
+          <RedBtn link={toMail} className="w-48 md:w-360" label={go_to_mail} />
         </ModalWrapper>
       )}
 

@@ -1,6 +1,7 @@
 const HiddenEye = () => {
   return (
     <svg
+      className="absolute -top-7 right-0"
       width="21"
       height="19"
       viewBox="0 0 21 19"

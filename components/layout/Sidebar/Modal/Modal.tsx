@@ -1,7 +1,7 @@
 import React from "react";
 import { Backdrop } from "components";
 
-const ModalWrapper: React.FC<{
+const Modal: React.FC<{
   closeModal?: () => void;
   children: any;
   className?: string;
@@ -9,7 +9,7 @@ const ModalWrapper: React.FC<{
   return (
     <>
       <div
-        className={`${className} z-40 fixed bg-zinc-800 md:w-601 rounded-xl left-1/2 top-1/2 right-1/2 -translate-x-1/2 -translate-y-1/2`}
+        className={`${className} z-40 w-382 h-658 fixed bg-zinc-800 rounded-xl left-0 top-0`}
       >
         {children}
       </div>
@@ -18,4 +18,4 @@ const ModalWrapper: React.FC<{
   );
 };
 
-export default ModalWrapper;
+export default Modal;

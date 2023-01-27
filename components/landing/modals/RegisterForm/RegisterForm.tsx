@@ -48,13 +48,17 @@ const RegisterForm: React.FC<{
   });
   const onFormSubmit = (formData: any) => {
     console.log(formData);
-    instance
-      .post("/register", formData)
-      .then((res) => {
-        succesSubmit(formData.email.split("@")[1]);
-        console.log(res);
-      })
-      .catch((err) => setBackErrors(err.response.data.errors));
+    instance()
+      .get("/sanctum/csrf-cookie")
+      .then(() => {
+        instance()
+          .post("/api/register", formData)
+          .then((res) => {
+            succesSubmit(formData.email.split("@")[1]);
+            console.log(res);
+          })
+          .catch((err) => setBackErrors(err.response.data.errors));
+      });
   };
   console.log(backErrors);
   return (
