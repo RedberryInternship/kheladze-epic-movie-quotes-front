@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { instance } from "services";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCookie } from "cookies-next";
 import { storeUser } from "store";
+import { fetchCSRFToken, login } from "services/axios";
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
   const { locale, push } = useRouter();
@@ -42,18 +43,26 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     resolver: yupResolver(loginValidationSchema),
   });
   const onFormSubmit = (formData: any) => {
-    instance()
-      .get("/sanctum/csrf-cookie")
+    fetchCSRFToken();
+    login(formData)
       .then((res) => {
-        instance()
-          .post("/api/login", formData)
-          .then((res) => {
-            setCookie("user", res.data.user);
-            push("/news-feed");
-          })
-          .catch((err) => setBackErrors(err.response.data.errors));
+        setCookie("user", res.data.user);
+        push("/news-feed");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setBackErrors(err.response.data.errors));
+
+    // instance()
+    //   .get("/sanctum/csrf-cookie")
+    //   .then((res) => {
+    //     instance()
+    //       .post("/api/login", formData)
+    //       .then((res) => {
+    //         setCookie("user", res.data.user);
+    //         push("/news-feed");
+    //       })
+    //       .catch((err) => setBackErrors(err.response.data.errors));
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   return (

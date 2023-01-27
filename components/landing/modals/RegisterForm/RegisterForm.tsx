@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { instance } from "services";
+
 import { useState } from "react";
+import { fetchCSRFToken, singup } from "services/axios";
 
 const RegisterForm: React.FC<{
   loginClick: () => void;
@@ -47,19 +48,12 @@ const RegisterForm: React.FC<{
     resolver: yupResolver(registerValidationSchema),
   });
   const onFormSubmit = (formData: any) => {
-    console.log(formData);
-    instance()
-      .get("/sanctum/csrf-cookie")
-      .then(() => {
-        instance()
-          .post("/api/register", formData)
-          .then((res) => {
-            succesSubmit(formData.email.split("@")[1]);
-            console.log(res);
-          })
-          .catch((err) => setBackErrors(err.response.data.errors));
-      });
+    fetchCSRFToken();
+    singup(formData)
+      .then((res) => succesSubmit(formData.email.split("@")[1]))
+      .catch((err) => setBackErrors(err.response.data.errors));
   };
+
   console.log(backErrors);
   return (
     <div className="flex flex-col items-center text-white">
@@ -79,7 +73,7 @@ const RegisterForm: React.FC<{
           error={errors.name}
           label={name}
           isDirty={dirtyFields.name}
-          backErr={backErrors.name}
+          backErr={backErrors?.name}
         />
         <Input
           name="email"
@@ -89,7 +83,7 @@ const RegisterForm: React.FC<{
           error={errors.email}
           label={email}
           isDirty={dirtyFields.email}
-          backErr={backErrors.email}
+          backErr={backErrors?.email}
         />
         <Input
           name="password"
