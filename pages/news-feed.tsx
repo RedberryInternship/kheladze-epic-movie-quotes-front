@@ -11,11 +11,9 @@ const News: NextPage = () => {
         className="text-white"
         onClick={() => {
           fetchCSRFToken().then(() => {
-            logout()
-              .then(() => {
-                push("/");
-              })
-              .catch((err) => console.log(err));
+            logout().then(() => {
+              push("/");
+            });
           });
         }}
       >
