@@ -2,14 +2,23 @@ import { formEn, formKa } from "lang";
 import { Google, Input, RedBtn } from "components";
 import { loginValidationSchema } from "schemas";
 
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { instance } from "services";
+
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { storeUser } from "store";
+import { fetchCSRFToken, login } from "services/axios";
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
   const {
     email,
     email_placeholder,
@@ -23,20 +32,28 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     singup,
     welcome_back,
   } = locale === "en" ? formEn : formKa;
+  const [backErrors, setBackErrors] = useState({
+    email: "",
+    password: "",
+  });
 
+  const dispatch = useDispatch();
   const {
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormData>({
     mode: "all",
     resolver: yupResolver(loginValidationSchema),
   });
-  const onFormSubmit = (formData: any) => {
-    instance
-      .post("/login", formData)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
+  const onFormSubmit: SubmitHandler<FormData> = async (formData) => {
+    try {
+      await fetchCSRFToken();
+      await login(formData);
+      push("/news-feed");
+    } catch (err: any) {
+      setBackErrors(err.response.data.errors);
+    }
   };
 
   return (
@@ -57,6 +74,7 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
           error={errors.email}
           label={email}
           isDirty={dirtyFields.email}
+          backErr={backErrors?.email}
         />
         <Input
           name="password"
@@ -66,6 +84,7 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
           error={errors.password}
           label={password}
           isDirty={dirtyFields.password}
+          backErr={backErrors?.password}
         />
         <div className="flex justify-between">
           <div className="flex justify-between gap-1">
@@ -77,9 +96,12 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
           </Link>
         </div>
         <RedBtn className="w-full" label={singin} />
-        <button className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md">
+        <a
+          href="http://127.0.0.1:8000/api/google/auth"
+          className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md"
+        >
           <Google /> {google}
-        </button>
+        </a>
       </form>
       <div className="mt-4">
         {dont_have_account}

@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 
 import Dropdown from "react-dropdown";
 
-const LangDropdown = () => {
+const LangDropdown: React.FC<{ className: string }> = ({ className }) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col text-orangeWhite absolute -left-16 top-1/4 cursor-pointer">
+    <div
+      className={`flex flex-col text-orangeWhite ${className} cursor-pointer`}
+    >
       <Dropdown
         className="text-orangeWhite"
         controlClassName=""
