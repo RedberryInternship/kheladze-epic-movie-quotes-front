@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 
 const Navbar = () => {
   const { locale, push, route } = useRouter();
-  console.log(route);
+
   const { movie_quotes, logout } = locale === "en" ? newsEn : newsKa;
   return (
     <div className="bg-zinc-800 h-86 flex justify-between items-center pl-9 md:pl-16 pr-9 md:pr-16">

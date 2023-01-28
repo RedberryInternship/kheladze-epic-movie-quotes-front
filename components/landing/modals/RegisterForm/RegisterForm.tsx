@@ -54,12 +54,14 @@ const RegisterForm: React.FC<{
     mode: "all",
     resolver: yupResolver(registerValidationSchema),
   });
-  const onFormSubmit: SubmitHandler<FormData> = (formData) => {
-    fetchCSRFToken().then(() => {
-      singup(formData)
-        .then((res) => succesSubmit(formData.email.split("@")[1]))
-        .catch((err) => setBackErrors(err.response.data.errors));
-    });
+  const onFormSubmit: SubmitHandler<FormData> = async (formData) => {
+    try {
+      await fetchCSRFToken();
+      await singup(formData);
+      succesSubmit(formData.email.split("@")[1]);
+    } catch (err: any) {
+      setBackErrors(err.response.data.errors);
+    }
   };
 
   return (

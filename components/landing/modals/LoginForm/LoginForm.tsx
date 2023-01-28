@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setCookie } from "cookies-next";
 import { storeUser } from "store";
 import { fetchCSRFToken, login } from "services/axios";
 
@@ -47,15 +46,14 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     mode: "all",
     resolver: yupResolver(loginValidationSchema),
   });
-  const onFormSubmit: SubmitHandler<FormData> = (formData) => {
-    fetchCSRFToken().then(() => {
-      login(formData)
-        .then((res) => {
-          setCookie("user", res.data.user);
-          push("/news-feed");
-        })
-        .catch((err) => setBackErrors(err.response.data.errors));
-    });
+  const onFormSubmit: SubmitHandler<FormData> = async (formData) => {
+    try {
+      await fetchCSRFToken();
+      await login(formData);
+      push("/news-feed");
+    } catch (err: any) {
+      setBackErrors(err.response.data.errors);
+    }
   };
 
   return (
