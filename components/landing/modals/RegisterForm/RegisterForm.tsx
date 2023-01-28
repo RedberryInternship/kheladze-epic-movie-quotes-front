@@ -2,13 +2,20 @@ import { formEn, formKa } from "lang";
 import { Google, Input, RedBtn } from "components";
 import { registerValidationSchema } from "schemas";
 
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useState } from "react";
 import { fetchCSRFToken, singup } from "services/axios";
+
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
 
 const RegisterForm: React.FC<{
   loginClick: () => void;
@@ -43,18 +50,18 @@ const RegisterForm: React.FC<{
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormData>({
     mode: "all",
     resolver: yupResolver(registerValidationSchema),
   });
-  const onFormSubmit = (formData: any) => {
-    fetchCSRFToken();
-    singup(formData)
-      .then((res) => succesSubmit(formData.email.split("@")[1]))
-      .catch((err) => setBackErrors(err.response.data.errors));
+  const onFormSubmit: SubmitHandler<FormData> = (formData) => {
+    fetchCSRFToken().then(() => {
+      singup(formData)
+        .then((res) => succesSubmit(formData.email.split("@")[1]))
+        .catch((err) => setBackErrors(err.response.data.errors));
+    });
   };
 
-  console.log(backErrors);
   return (
     <div className="flex flex-col items-center text-white">
       <h1 className="text-2xl md:text-4xl font-medium mt-10 mb-3 md:mt-14">

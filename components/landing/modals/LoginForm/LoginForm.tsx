@@ -2,7 +2,7 @@ import { formEn, formKa } from "lang";
 import { Google, Input, RedBtn } from "components";
 import { loginValidationSchema } from "schemas";
 
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,6 +12,11 @@ import { useDispatch } from "react-redux";
 import { setCookie } from "cookies-next";
 import { storeUser } from "store";
 import { fetchCSRFToken, login } from "services/axios";
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
   const { locale, push } = useRouter();
@@ -38,31 +43,19 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormData>({
     mode: "all",
     resolver: yupResolver(loginValidationSchema),
   });
-  const onFormSubmit = (formData: any) => {
-    fetchCSRFToken();
-    login(formData)
-      .then((res) => {
-        setCookie("user", res.data.user);
-        push("/news-feed");
-      })
-      .catch((err) => setBackErrors(err.response.data.errors));
-
-    // instance()
-    //   .get("/sanctum/csrf-cookie")
-    //   .then((res) => {
-    //     instance()
-    //       .post("/api/login", formData)
-    //       .then((res) => {
-    //         setCookie("user", res.data.user);
-    //         push("/news-feed");
-    //       })
-    //       .catch((err) => setBackErrors(err.response.data.errors));
-    //   })
-    //   .catch((err) => console.log(err));
+  const onFormSubmit: SubmitHandler<FormData> = (formData) => {
+    fetchCSRFToken().then(() => {
+      login(formData)
+        .then((res) => {
+          setCookie("user", res.data.user);
+          push("/news-feed");
+        })
+        .catch((err) => setBackErrors(err.response.data.errors));
+    });
   };
 
   return (

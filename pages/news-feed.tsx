@@ -10,9 +10,12 @@ const News: NextPage = () => {
       <button
         className="text-white"
         onClick={() => {
-          fetchCSRFToken();
-          logout().then(() => {
-            push("/");
+          fetchCSRFToken().then(() => {
+            logout()
+              .then(() => {
+                push("/");
+              })
+              .catch((err) => console.log(err));
           });
         }}
       >

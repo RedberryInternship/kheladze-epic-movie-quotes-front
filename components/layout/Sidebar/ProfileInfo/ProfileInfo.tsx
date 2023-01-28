@@ -18,11 +18,11 @@ const ProfileInfo: React.FC<{
       </div>
       <div className="ml-3 flex gap-7 items-center">
         <HomeIcon />
-        <p>{texts.news}</p>
+        <Link href={"/news-feed"}>{texts.news}</Link>
       </div>
       <div className="ml-3 flex gap-7 items-center">
         <Camera />
-        <p>{texts.list_movies}</p>
+        <Link href={"/movies"}>{texts.list_movies}</Link>
       </div>
     </div>
   );

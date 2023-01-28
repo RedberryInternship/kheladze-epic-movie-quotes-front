@@ -3,5 +3,7 @@
   "logout": "Logout",
   "edit_profile": "Edit your profile",
   "news": "News feed",
-  "list_movies": "List of movies"
+  "list_movies": "List of movies",
+  "write_new": "Write new quote",
+  "search_by": "Search by"
 }
