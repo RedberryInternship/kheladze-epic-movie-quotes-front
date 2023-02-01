@@ -14,15 +14,11 @@ const Sidebar: React.FC<{ user?: string }> = ({ user }) => {
           </Modal>
         )}
       </div>
-      <div className="hidden md:block">
+      <div className="hidden md:block fixed left-0 top-20">
         <ProfileInfo texts={texts} />
       </div>
     </div>
   );
-};
-
-export const getInitialProps = async () => {
-  return { props: { user: "user" } };
 };
 
 export default Sidebar;

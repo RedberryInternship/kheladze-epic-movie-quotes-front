@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface RootState {
+  user: {
+    user: {
+      name: string;
+      emails: string[];
+    };
+  };
+}
+
 const initialState = {
   user: {},
 };

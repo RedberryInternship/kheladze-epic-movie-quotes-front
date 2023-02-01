@@ -1,7 +1,7 @@
-const ErrorInput = () => {
+const ErrorInput: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <svg
-      className="absolute right-7 top-10"
+      className={`absolute ${className ? className : "top-10 right-7 "}`}
       width="18"
       height="18"
       viewBox="0 0 18 18"

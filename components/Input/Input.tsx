@@ -1,16 +1,17 @@
 import { CheckedInput, ErrorInput, Eye, HiddenEye } from "components/icons";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { FieldError } from "react-hook-form";
 
 const Input: React.FC<{
   name: string;
   type: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   register: any;
   error?: any;
   isDirty?: boolean;
   backErr?: string;
+  className?: string;
 }> = ({
   name,
   type,
@@ -20,6 +21,7 @@ const Input: React.FC<{
   error,
   isDirty,
   backErr,
+  className,
 }) => {
   const [toggle, setToggle] = useState(type);
   let showError = false;
@@ -32,17 +34,18 @@ const Input: React.FC<{
   if (isDirty && error) {
     showError = true;
   }
+  const { pathname } = useRouter();
 
   return (
-    <div className="flex flex-col pb-2 relative">
+    <div className="flex flex-col pb-2 relative w-full">
       <label className="mb-2" htmlFor={name}>
         {label}
-        <span className="text-red-500"> *</span>
+        {!className && <span className="text-red-500"> *</span>}
       </label>
       {isDirty && !showError && <CheckedInput />}
 
       <input
-        className={`focus:outline-none focus:ring-1 focus:border-blue-300 border box-border text-gray-800 rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
+        className={`${className} focus:outline-none focus:ring-1 focus:border-blue-300 border box-border text-gray-800 rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
         ${isDirty && !showError && "border-green-700 focus:border-green-700"} 
         `}
@@ -53,8 +56,10 @@ const Input: React.FC<{
       />
       {showError && (
         <>
-          <ErrorInput />
-          <p className="absolute text-sm -bottom-3 text-red-500">
+          <ErrorInput
+            className={`${pathname === "/profile" ? "top-12 right-9" : ""}`}
+          />
+          <p className={`absolute text-sm -bottom-3 text-red-500`}>
             {error?.message}
           </p>
         </>
@@ -65,7 +70,9 @@ const Input: React.FC<{
 
       {type === "password" && (
         <div
-          className="absolute right-1 bottom-2 cursor-pointer"
+          className={`absolute cursor-pointer ${
+            pathname === "/profile" ? "right-2 bottom-3" : "right-1 bottom-2"
+          }`}
           onClick={() => {
             if (toggle === "password") {
               setToggle("text");

@@ -1,5 +1,5 @@
 const BlackBtn: React.FC<{
-  click: () => void;
+  click?: () => void;
   label: string;
   className?: string;
 }> = ({ label, click, className }) => {

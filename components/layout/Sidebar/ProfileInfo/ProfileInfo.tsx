@@ -13,7 +13,7 @@ const ProfileInfo: React.FC<{
         />
         <div>
           <h1 className="text-xl">saxeli gvari</h1>
-          <Link href={""}>{texts.edit_profile}</Link>
+          <Link href={"/profile"}>{texts.edit_profile}</Link>
         </div>
       </div>
       <div className="ml-3 flex gap-7 items-center">

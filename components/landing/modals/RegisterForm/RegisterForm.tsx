@@ -121,7 +121,7 @@ const RegisterForm: React.FC<{
             {forgot_password}
           </Link>
         </div>
-        <RedBtn className="w-full" label={get_started} />
+        <RedBtn className="w-360" label={get_started} />
         <button className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md">
           <Google /> {google}
         </button>

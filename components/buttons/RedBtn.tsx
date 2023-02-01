@@ -1,13 +1,13 @@
 const RedBtn: React.FC<{
   className?: string;
   label: string;
-  click?: () => void;
+  click?: any;
   link?: string | null;
-}> = ({ className, label, click, link }) => {
+}> = ({ className = "w-28", label, click, link }) => {
   return (
     <button
       onClick={click}
-      className={`bg-red-600 w-28 h-10 rounded text-white text-base relative ${className}`}
+      className={`bg-red-600 h-10 rounded text-white text-base relative ${className}`}
     >
       {label}
       {link && (

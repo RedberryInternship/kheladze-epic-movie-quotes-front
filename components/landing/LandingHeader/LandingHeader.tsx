@@ -13,7 +13,7 @@ const LandingHeader: React.FC<{
         <RedBtn
           click={singup}
           label={labels.singup}
-          className="hidden md:block"
+          className="hidden md:block w-28"
         />
         <BlackBtn click={login} label={labels.login} />
       </div>
