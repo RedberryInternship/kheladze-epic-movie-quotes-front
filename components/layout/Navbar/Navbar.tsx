@@ -1,5 +1,6 @@
 import { Burger, Ring, Search, LangDropdown, BlackBtn } from "components";
 import { deleteCookie } from "cookies-next";
+import { useTranslate } from "hooks";
 import { newsEn, newsKa } from "lang";
 import Link from "next/link";
 
@@ -7,9 +8,9 @@ import { useRouter } from "next/router";
 import { fetchCSRFToken, logout } from "services/axios";
 
 const Navbar = () => {
-  const { locale, push, route } = useRouter();
+  const { push, route } = useRouter();
 
-  const { movie_quotes, log_out } = locale === "en" ? newsEn : newsKa;
+  const { movie_quotes, log_out } = useTranslate(newsEn, newsKa);
   const logoutHandler = async () => {
     try {
       await fetchCSRFToken();
