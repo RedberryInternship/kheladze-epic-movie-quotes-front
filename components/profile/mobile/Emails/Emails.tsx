@@ -12,8 +12,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
+import { EmailsProps } from "types";
 
-const Emails: React.FC<{ profile: any; user: any }> = ({ profile, user }) => {
+const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
   const { asPath, query, locale, back } = useRouter();
 
   const [showSuccess, setShowSuccess] = useState(false);

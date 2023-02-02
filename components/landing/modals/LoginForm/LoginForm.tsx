@@ -8,14 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { storeUser } from "store";
 import { fetchCSRFToken, login } from "services/axios";
-
-interface FormData {
-  email: string;
-  password: string;
-}
+import { Login } from "types";
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
   const { locale, push } = useRouter();
@@ -37,16 +31,15 @@ const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
     password: "",
   });
 
-  const dispatch = useDispatch();
   const {
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm<FormData>({
+  } = useForm<Login>({
     mode: "all",
     resolver: yupResolver(loginValidationSchema),
   });
-  const onFormSubmit: SubmitHandler<FormData> = async (formData) => {
+  const onFormSubmit: SubmitHandler<Login> = async (formData) => {
     try {
       await fetchCSRFToken();
       await login(formData);

@@ -13,11 +13,12 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { useTranslate } from "hooks";
 
 const Profile: NextPage = () => {
-  const { locale, route, query } = useRouter();
+  const { route, query } = useRouter();
 
-  const profile = locale === "en" ? profileEn : profileKa;
+  const profile = useTranslate(profileEn, profileKa);
   const { user } = useSelector((store: RootState) => store?.user);
 
   return (

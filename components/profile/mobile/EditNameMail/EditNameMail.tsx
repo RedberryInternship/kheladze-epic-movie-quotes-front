@@ -1,22 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, InputLogged, LeftArrow, RedBtn, Success } from "components";
+import { Input, LeftArrow, RedBtn, Success } from "components";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { emailValidaion, nameValidation } from "schemas";
 import { addEmail, changeUsername, fetchCSRFToken } from "services/axios";
+import { EditEmail, EditNameMailProps } from "types";
 
-interface FormData {
-  email: string;
-}
-
-const EditNameMail: React.FC<{
-  profile: any;
-  label: string;
-  back: string;
-  user?: any;
-}> = ({ profile, label, back, user }) => {
+const EditNameMail: React.FC<EditNameMailProps> = ({
+  profile,
+  label,
+  back,
+  user,
+}) => {
   const { query, locale, push } = useRouter();
 
   const schema = query.add === "mail" ? emailValidaion : nameValidation;
@@ -24,7 +21,7 @@ const EditNameMail: React.FC<{
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<EditEmail>({
     mode: "all",
     resolver: yupResolver(schema),
   });
@@ -32,7 +29,7 @@ const EditNameMail: React.FC<{
   const [backErrors, setBackErrors] = useState({ email: "" });
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const onFormSubmit: SubmitHandler<FormData> = async (data) => {
+  const onFormSubmit: SubmitHandler<EditEmail> = async (data) => {
     if (query.add === "mail") {
       try {
         await fetchCSRFToken();

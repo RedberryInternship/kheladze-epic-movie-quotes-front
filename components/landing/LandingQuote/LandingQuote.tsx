@@ -1,8 +1,10 @@
-const LandingQuote: React.FC<{
-  background: string;
-  quote: string;
-  movie: string;
-}> = ({ background, quote, movie }) => {
+import { LandingQuoteProps } from "types";
+
+const LandingQuote: React.FC<LandingQuoteProps> = ({
+  background,
+  quote,
+  movie,
+}) => {
   return (
     <div
       className={`text-white flex flex-col justify-center gap-4 md:pl-40 pl-9 bg-fixed bg-cover h-screen bg-center bg-no-repeat ${background}`}

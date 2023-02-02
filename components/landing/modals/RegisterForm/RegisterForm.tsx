@@ -9,18 +9,12 @@ import { useRouter } from "next/router";
 
 import { useState } from "react";
 import { fetchCSRFToken, singup } from "services/axios";
+import { Register, RegisterProps } from "types";
 
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
-
-const RegisterForm: React.FC<{
-  loginClick: () => void;
-  succesSubmit: (linkTo: string) => void;
-}> = ({ loginClick, succesSubmit }) => {
+const RegisterForm: React.FC<RegisterProps> = ({
+  loginClick,
+  succesSubmit,
+}) => {
   const { locale } = useRouter();
 
   const [backErrors, setBackErrors] = useState({
@@ -50,11 +44,11 @@ const RegisterForm: React.FC<{
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm<FormData>({
+  } = useForm<Register>({
     mode: "all",
     resolver: yupResolver(registerValidationSchema),
   });
-  const onFormSubmit: SubmitHandler<FormData> = async (formData) => {
+  const onFormSubmit: SubmitHandler<Register> = async (formData) => {
     try {
       await fetchCSRFToken();
       await singup(formData);

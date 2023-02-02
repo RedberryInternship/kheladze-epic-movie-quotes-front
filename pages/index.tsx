@@ -9,6 +9,7 @@ import {
   CheckedActivated,
   Sent,
 } from "components";
+import { useTranslate } from "hooks";
 
 import { landingEn, landingKa } from "lang";
 
@@ -38,7 +39,7 @@ export default function Home() {
     thank_you,
     check_email,
     go_to_mail,
-  } = locale === "en" ? landingEn : landingKa;
+  } = useTranslate(landingEn, landingKa);
 
   return (
     <div className="bg-neutral-900">

@@ -6,28 +6,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { passwordValidation } from "schemas";
 import { changePassword, fetchCSRFToken } from "services/axios";
+import { EditPasswordForm, EditPasswordProps } from "types";
 
-interface FormData {
-  password: string;
-  password_confirmation: string;
-}
-
-const EditPassword: React.FC<{ profile: any; user: any }> = ({
-  profile,
-  user,
-}) => {
+const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<EditPasswordForm>({
     mode: "all",
     resolver: yupResolver(passwordValidation),
   });
   const { locale, back } = useRouter();
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const onFormSubmit = async (data: FormData) => {
+  const onFormSubmit = async (data: EditPasswordForm) => {
     try {
       await fetchCSRFToken();
       await changePassword({ ...data, userId: user.id });

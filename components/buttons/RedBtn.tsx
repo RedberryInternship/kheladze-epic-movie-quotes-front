@@ -1,9 +1,11 @@
-const RedBtn: React.FC<{
-  className?: string;
-  label: string;
-  click?: any;
-  link?: string | null;
-}> = ({ className = "w-28", label, click, link }) => {
+import { RedBtnProps } from "types";
+
+const RedBtn: React.FC<RedBtnProps> = ({
+  className = "w-28",
+  label,
+  click,
+  link,
+}) => {
   return (
     <button
       onClick={click}

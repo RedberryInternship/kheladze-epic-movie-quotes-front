@@ -1,11 +1,8 @@
 import { Backdrop } from "components";
 
 import { motion } from "framer-motion";
-const Modal: React.FC<{
-  closeModal?: () => void;
-  children: any;
-  className?: string;
-}> = ({ closeModal, children, className }) => {
+import { ModalProps } from "types";
+const Modal: React.FC<ModalProps> = ({ closeModal, children, className }) => {
   return (
     <>
       <motion.div
