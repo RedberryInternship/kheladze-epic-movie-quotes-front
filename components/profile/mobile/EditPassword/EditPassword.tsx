@@ -7,8 +7,9 @@ import { useForm } from "react-hook-form";
 import { passwordValidation } from "schemas";
 import { changePassword, fetchCSRFToken } from "services/axios";
 import { EditPasswordForm, EditPasswordProps } from "types";
+import { useTranslation } from "next-i18next";
 
-const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
+const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
   const {
     register,
     handleSubmit,
@@ -17,6 +18,9 @@ const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
     mode: "all",
     resolver: yupResolver(passwordValidation),
   });
+
+  const { t } = useTranslation("profile");
+
   const { locale, back } = useRouter();
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -45,14 +49,14 @@ const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
       </div>
       <div className="w-full bg-zinc-800 pl-8 pr-8 pt-6 pb-11 rounded-xl flex flex-col gap-2 items-start justify-center">
         <div className="w-full flex flex-col items-start bg-neutral-900 border border-gray-600 rounded-md p-6">
-          <h3 className="mb-4">{profile.password_should_contain}</h3>
+          <h3 className="mb-4">{t("password_should_contain")}</h3>
           <div className="flex items-center gap-2 mb-1">
             <Dot />
-            <p className={`text-sm text-neutral-400`}>{profile.or_more}</p>
+            <p className={`text-sm text-neutral-400`}>{t("or_more")}</p>
           </div>
           <div className="flex items-center gap-2 ">
             <Dot />
-            <p className={`text-sm text-neutral-400`}>{profile.lowercase}</p>
+            <p className={`text-sm text-neutral-400`}>{t("lowercase")}</p>
           </div>
         </div>
         <form
@@ -64,7 +68,7 @@ const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
             type="password"
             register={register("password")}
             error={errors.password}
-            label={profile.new_password}
+            label={t("new_password")}
             className="h-12"
           />
           <Input
@@ -72,16 +76,16 @@ const EditPassword: React.FC<EditPasswordProps> = ({ profile, user }) => {
             type="password"
             register={register("password_confirmation")}
             error={errors.password_confirmation}
-            label={profile.confirm_new_pass}
+            label={t("confirm_new_pass")}
             className="h-12"
           />
         </form>
       </div>
       <div className="flex justify-between pl-12 pr-7 mt-11">
-        <Link href="/profile">{profile.cancel}</Link>
+        <Link href="/profile">{t("cancel")}</Link>
         <RedBtn
           className={locale === "en" ? "w-16" : "w-20"}
-          label={profile.add}
+          label={t("add")}
           click={handleSubmit(onFormSubmit)}
         />
       </div>

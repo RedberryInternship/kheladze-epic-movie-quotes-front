@@ -13,9 +13,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
 import { EmailsProps } from "types";
+import { useTranslation } from "next-i18next";
 
-const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
+const Emails: React.FC<EmailsProps> = ({ user }) => {
   const { asPath, query, locale, back } = useRouter();
+  const { t } = useTranslation("profile");
 
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -45,18 +47,13 @@ const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
       {query.add === "mail" ? (
         <EditNameMail
           back={"/profile?edit=mail"}
-          label={profile.add_new_mail}
-          profile={profile}
+          label={t("add_new_mail")}
           user={user}
         />
       ) : (
         <div>
           {showSuccess && (
-            <Success
-              close={() => setShowSuccess(false)}
-              className="h-14"
-              text={profile.changes_updated}
-            />
+            <Success close={() => setShowSuccess(false)} className="h-14" />
           )}
 
           <div className="w-full h-16 flex items-center">
@@ -66,7 +63,7 @@ const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
           </div>
           <div className="w-full bg-zinc-800 pl-8 pr-8 pt-6 pb-11 rounded-xl flex flex-col gap-8 items-start justify-center">
             <div className="w-full flex flex-col gap-6 border-b border-gray-300 pb-6">
-              <h3>{profile.primary_email}</h3>
+              <h3>{t("primary_email")}</h3>
               <div className="flex justify-between items-center h-12 p-4 rounded-md border border-green-700 bg-green-700 bg-opacity-20">
                 <p>{primaryEmail && primaryEmail[0].email}</p>
                 <Verified />
@@ -87,30 +84,24 @@ const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
                           <Link href={`${asPath}&sure=makeprimary`}>
                             <BlackBtn
                               className={locale === "en" ? "w-36" : " w-52"}
-                              label={profile.make_primary}
+                              label={t("make_primary")}
                             />
                           </Link>
                         ) : (
                           <p className="flex gap-1 items-center italic text-amber-500">
                             <NotVerified />
-                            <span>{profile.not_verified}</span>
+                            <span>{t("not_verified")}</span>
                           </p>
                         )}
 
                         {query.sure === "makeprimary" && (
-                          <Sure
-                            labels={profile}
-                            confirm={() => makeEmailPrimary(query.id)}
-                          />
+                          <Sure confirm={() => makeEmailPrimary(query.id)} />
                         )}
                         <Link href={`${asPath}&sure=remove&id=${email.id}`}>
-                          {profile.remove}
+                          {t("remove")}
                         </Link>
                         {query.sure === "remove" && (
-                          <Sure
-                            labels={profile}
-                            confirm={() => removeEmail(query.id)}
-                          />
+                          <Sure confirm={() => removeEmail(query.id)} />
                         )}
                       </div>
                     </div>
@@ -118,12 +109,12 @@ const Emails: React.FC<EmailsProps> = ({ profile, user }) => {
                 }
               })}
 
-            <p className="mt-7">{profile.add_new_mail}</p>
+            <p className="mt-7">{t("add_new_mail")}</p>
             <Link
               href={`${asPath}&add=mail`}
               className="border rounded-md w-full flex gap-2 items-center justify-center h-8"
             >
-              <Plus /> {profile.add}
+              <Plus /> {t("add")}
             </Link>
           </div>
         </div>

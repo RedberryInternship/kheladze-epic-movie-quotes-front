@@ -7,13 +7,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { emailValidaion, nameValidation } from "schemas";
 import { addEmail, changeUsername, fetchCSRFToken } from "services/axios";
 import { EditEmail, EditNameMailProps } from "types";
+import { useTranslation } from "next-i18next";
 
-const EditNameMail: React.FC<EditNameMailProps> = ({
-  profile,
-  label,
-  back,
-  user,
-}) => {
+const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
   const { query, locale, push } = useRouter();
 
   const schema = query.add === "mail" ? emailValidaion : nameValidation;
@@ -25,6 +21,8 @@ const EditNameMail: React.FC<EditNameMailProps> = ({
     mode: "all",
     resolver: yupResolver(schema),
   });
+
+  const { t } = useTranslation("profile");
 
   const [backErrors, setBackErrors] = useState({ email: "" });
   const [showSuccess, setShowSuccess] = useState(false);
@@ -80,11 +78,11 @@ const EditNameMail: React.FC<EditNameMailProps> = ({
         />
       </form>
       <div className="flex justify-between pl-12 pr-7 mt-24">
-        <Link href={back}>{profile.cancel}</Link>
+        <Link href={back}>{t("cancel")}</Link>
         <RedBtn
           click={handleSubmit(onFormSubmit)}
           className={locale === "en" ? "w-16" : "w-20"}
-          label={profile.add}
+          label={t("add")}
         />
       </div>
     </div>

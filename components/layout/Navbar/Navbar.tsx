@@ -1,7 +1,6 @@
 import { Burger, Ring, Search, LangDropdown, BlackBtn } from "components";
 import { deleteCookie } from "cookies-next";
-import { useTranslate } from "hooks";
-import { newsEn, newsKa } from "lang";
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
@@ -10,7 +9,8 @@ import { fetchCSRFToken, logout } from "services/axios";
 const Navbar = () => {
   const { push, route } = useRouter();
 
-  const { movie_quotes, log_out } = useTranslate(newsEn, newsKa);
+  const { t } = useTranslation("newsfeed");
+
   const logoutHandler = async () => {
     try {
       await fetchCSRFToken();
@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-zinc-800 h-86 flex justify-between items-center pl-9 md:pl-16 pr-9 md:pr-16">
-      <h1 className="text-orangeWhite hidden md:block">{movie_quotes}</h1>
+      <h1 className="text-orangeWhite hidden md:block">{t("movie_quotes")}</h1>
       <Link href={`${route}?sidebar=1`}>
         <Burger className="md:hidden" />
       </Link>
@@ -33,7 +33,7 @@ const Navbar = () => {
         <BlackBtn
           className="hidden md:block"
           click={logoutHandler}
-          label={log_out}
+          label={t("log_out")}
         />
       </div>
     </div>

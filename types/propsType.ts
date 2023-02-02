@@ -35,12 +35,11 @@ export type ModalProps = {
 };
 
 export type EditNameMailProps = {
-  profile: any;
   label: string;
   back: string;
   user?: any;
 };
 
-export type EditPasswordProps = { profile: any; user: any };
+export type EditPasswordProps = { user: any };
 
-export type EmailsProps = { profile: any; user: any };
+export type EmailsProps = { user: any };

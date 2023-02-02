@@ -6,7 +6,7 @@ const Input: React.FC<{
   name: string;
   type: string;
   label: string;
-  placeholder?: string;
+  placeholder?: string | null;
   register: any;
   error?: any;
   isDirty?: boolean;
