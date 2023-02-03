@@ -6,22 +6,13 @@ import {
   EditPassword,
   Emails,
 } from "components";
-import { RootState } from "store";
-
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useProfile } from "hooks";
 
 const Profile: NextPage = () => {
-  const { route, query } = useRouter();
-
-  const { t } = useTranslation("profile");
-
-  const { user } = useSelector((store: RootState) => store?.user);
-
+  const { route, query, t, user } = useProfile();
   return (
     <Layout>
       {user && !query.edit && (

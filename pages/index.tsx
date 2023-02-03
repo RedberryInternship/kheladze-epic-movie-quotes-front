@@ -10,20 +10,24 @@ import {
   Sent,
 } from "components";
 
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
 import { GetStaticProps, NextPage } from "next";
+import useHome from "hooks/useHome";
 
 const Home: NextPage = () => {
-  const [LoginModal, setLoginModal] = useState(false);
-  const [singUpModal, setSingUpModal] = useState(false);
-  const [checkEmailModal, setCheckEmailModal] = useState(false);
-  const [toMail, setToMail] = useState("");
-  const { locale, query, push, ...rest } = useRouter();
-
-  const { t } = useTranslation("common");
+  const {
+    LoginModal,
+    setLoginModal,
+    singUpModal,
+    setSingUpModal,
+    checkEmailModal,
+    setCheckEmailModal,
+    toMail,
+    setToMail,
+    query,
+    push,
+    t,
+  } = useHome();
 
   return (
     <div className="bg-neutral-900">

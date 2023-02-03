@@ -1,18 +1,8 @@
 import { CheckedInput, ErrorInput, Eye, HiddenEye } from "components/icons";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { InputProps } from "types";
+import { useInput } from "./useInput";
 
-const Input: React.FC<{
-  name: string;
-  type: string;
-  label: string;
-  placeholder?: string | null;
-  register: any;
-  error?: any;
-  isDirty?: boolean;
-  backErr?: string;
-  className?: string;
-}> = ({
+const Input: React.FC<InputProps> = ({
   name,
   type,
   label,
@@ -23,7 +13,7 @@ const Input: React.FC<{
   backErr,
   className,
 }) => {
-  const [toggle, setToggle] = useState(type);
+  const { toggle, setToggle, pathname } = useInput(type);
   let showError = false;
   if (isDirty && !error) {
     showError = false;
@@ -34,7 +24,6 @@ const Input: React.FC<{
   if (isDirty && error) {
     showError = true;
   }
-  const { pathname } = useRouter();
 
   return (
     <div className="flex flex-col pb-2 relative w-full">
@@ -51,7 +40,7 @@ const Input: React.FC<{
         `}
         id={name}
         type={toggle}
-        placeholder={placeholder}
+        placeholder={placeholder ? placeholder : ""}
         {...register}
       />
       {showError && (

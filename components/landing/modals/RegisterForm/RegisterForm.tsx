@@ -1,36 +1,24 @@
 import { Google, Input, RedBtn } from "components";
-import { registerValidationSchema } from "schemas";
-
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
-import { useState } from "react";
 import { fetchCSRFToken, singup } from "services/axios";
 import { Register, RegisterProps } from "types";
-import { useTranslation } from "next-i18next";
+import { useRegisterForm } from "./useRegisterForm";
 
 const RegisterForm: React.FC<RegisterProps> = ({
   loginClick,
   succesSubmit,
 }) => {
-  const { locale } = useRouter();
-
-  const [backErrors, setBackErrors] = useState({
-    name: "",
-    email: "",
-  });
-  const { t } = useTranslation("form");
-
   const {
+    t,
+    backErrors,
+    setBackErrors,
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm<Register>({
-    mode: "all",
-    resolver: yupResolver(registerValidationSchema),
-  });
+  } = useRegisterForm();
+
   const onFormSubmit: SubmitHandler<Register> = async (formData) => {
     try {
       await fetchCSRFToken();

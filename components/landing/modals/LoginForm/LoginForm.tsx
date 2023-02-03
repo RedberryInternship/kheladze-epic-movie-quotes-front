@@ -4,30 +4,22 @@ import { loginValidationSchema } from "schemas";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
 
-import { useState } from "react";
 import { fetchCSRFToken, login } from "services/axios";
 import { Login } from "types";
+import { useLoginForm } from "./useLoginForm";
 
 const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
-  const { push } = useRouter();
-
-  const { t } = useTranslation("form");
-  const [backErrors, setBackErrors] = useState({
-    email: "",
-    password: "",
-  });
-
   const {
+    t,
+    push,
+    backErrors,
+    setBackErrors,
     register,
     formState: { errors, dirtyFields },
     handleSubmit,
-  } = useForm<Login>({
-    mode: "all",
-    resolver: yupResolver(loginValidationSchema),
-  });
+  } = useLoginForm();
+
   const onFormSubmit: SubmitHandler<Login> = async (formData) => {
     try {
       await fetchCSRFToken();

@@ -1,10 +1,8 @@
 import { Backdrop, RedBtn } from "components";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import { useSure } from "./useSure";
 
 const Sure: React.FC<{ confirm: any }> = ({ confirm }) => {
-  const { back } = useRouter();
-  const { t } = useTranslation("profile");
+  const { t, back } = useSure();
 
   return (
     <>

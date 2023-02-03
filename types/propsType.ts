@@ -1,3 +1,8 @@
+import { DefaultTFuncReturn } from "i18next";
+import { ReactNode } from "react";
+import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { User } from "./global";
+
 export type RegisterProps = {
   loginClick: () => void;
   succesSubmit: (linkTo: string) => void;
@@ -9,6 +14,18 @@ export type LandingHeaderProps = {
   labels: { movie_quotes: string; singup: string; login: string };
 };
 
+export type InputProps = {
+  name: string;
+  type: string;
+  label: string;
+  placeholder?: DefaultTFuncReturn;
+  register: UseFormRegisterReturn;
+  error?: FieldError;
+  isDirty?: boolean;
+  backErr?: string;
+  className?: string;
+};
+
 export type LandingQuoteProps = {
   background: string;
   quote: string;
@@ -18,28 +35,28 @@ export type LandingQuoteProps = {
 export type RedBtnProps = {
   className?: string;
   label: string;
-  click?: any;
+  click?: () => void;
   link?: string | null;
 };
 
 export type ModalWrapperProps = {
   closeModal?: () => void;
-  children: any;
+  children: ReactNode;
   className?: string;
 };
 
 export type ModalProps = {
   closeModal?: () => void;
-  children: any;
+  children: ReactNode;
   className?: string;
 };
 
 export type EditNameMailProps = {
   label: string;
   back: string;
-  user?: any;
+  user?: User;
 };
 
-export type EditPasswordProps = { user: any };
+export type EditPasswordProps = { user: User };
 
-export type EmailsProps = { user: any };
+export type EmailsProps = { user: User };

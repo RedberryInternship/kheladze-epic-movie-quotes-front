@@ -1,31 +1,24 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, LeftArrow, RedBtn, Success } from "components";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { emailValidaion, nameValidation } from "schemas";
+import { SubmitHandler } from "react-hook-form";
 import { addEmail, changeUsername, fetchCSRFToken } from "services/axios";
 import { EditEmail, EditNameMailProps } from "types";
-import { useTranslation } from "next-i18next";
+import { useEditNameMail } from "./useEditNameMail";
 
 const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
-  const { query, locale, push } = useRouter();
-
-  const schema = query.add === "mail" ? emailValidaion : nameValidation;
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<EditEmail>({
-    mode: "all",
-    resolver: yupResolver(schema),
-  });
-
-  const { t } = useTranslation("profile");
-
-  const [backErrors, setBackErrors] = useState({ email: "" });
-  const [showSuccess, setShowSuccess] = useState(false);
+    query,
+    locale,
+    push,
+    t,
+    backErrors,
+    setBackErrors,
+    showSuccess,
+    setShowSuccess,
+  } = useEditNameMail();
 
   const onFormSubmit: SubmitHandler<EditEmail> = async (data) => {
     if (query.add === "mail") {
@@ -39,7 +32,7 @@ const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
     } else if (query.edit === "name") {
       try {
         await fetchCSRFToken();
-        await changeUsername({ name: data.email, userId: user.id });
+        await changeUsername({ name: data.email, userId: user?.id });
         setShowSuccess(true);
       } catch (error) {
         setBackErrors({ email: "name already exists" });

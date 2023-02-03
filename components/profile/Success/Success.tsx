@@ -1,12 +1,11 @@
 import { Backdrop, Exit, SuccessIcon } from "components";
-import { useTranslation } from "next-i18next";
+import { useSuccess } from "./useSuccess";
 
 const Success: React.FC<{
   className: string;
   close: () => void;
 }> = ({ className, close }) => {
-  const { t } = useTranslation("profile");
-
+  const { t } = useSuccess();
   return (
     <>
       <div

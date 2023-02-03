@@ -1,8 +1,8 @@
 import { Modal, ProfileInfo } from "components";
-import { useRouter } from "next/router";
+import { useSidebar } from "./useSidebar";
 
 const Sidebar: React.FC<{ user?: string }> = ({ user }) => {
-  const { push, route, query } = useRouter();
+  const { push, route, query } = useSidebar();
 
   return (
     <div>

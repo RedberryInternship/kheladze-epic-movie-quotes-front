@@ -9,21 +9,16 @@ import {
   NotVerified,
 } from "components";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
 import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
-import { EmailsProps } from "types";
-import { useTranslation } from "next-i18next";
+import { Email, EmailsProps } from "types";
+import { useEmails } from "./useEmails";
 
 const Emails: React.FC<EmailsProps> = ({ user }) => {
-  const { asPath, query, locale, back } = useRouter();
-  const { t } = useTranslation("profile");
-
-  const [showSuccess, setShowSuccess] = useState(false);
+  const { showSuccess, setShowSuccess, t, asPath, query, locale, back } =
+    useEmails();
 
   const primaryEmail =
-    user.emails &&
-    user.emails.filter((email: any) => email.primary === 1 && email);
+    user.emails && user.emails.filter((email) => email.primary === 1 && email);
 
   const removeEmail = async (id: any) => {
     try {
@@ -71,7 +66,7 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
             </div>
 
             {user.emails &&
-              user.emails.map((email: any) => {
+              user.emails.map((email) => {
                 if (!email.primary) {
                   return (
                     <div
@@ -81,7 +76,9 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
                       <p className="text-xl mb-8">{email.email}</p>
                       <div className="flex justify-between items-center">
                         {email.email_verified_at ? (
-                          <Link href={`${asPath}&sure=makeprimary`}>
+                          <Link
+                            href={`${asPath}&sure=makeprimary&id=${email.id}`}
+                          >
                             <BlackBtn
                               className={locale === "en" ? "w-36" : " w-52"}
                               label={t("make_primary")}

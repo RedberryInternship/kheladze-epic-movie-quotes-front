@@ -1,15 +1,11 @@
 import { Burger, Ring, Search, LangDropdown, BlackBtn } from "components";
 import { deleteCookie } from "cookies-next";
-import { useTranslation } from "next-i18next";
 import Link from "next/link";
-
-import { useRouter } from "next/router";
 import { fetchCSRFToken, logout } from "services/axios";
+import { useNavbar } from "./useNavbar";
 
 const Navbar = () => {
-  const { push, route } = useRouter();
-
-  const { t } = useTranslation("newsfeed");
+  const { t, push, route } = useNavbar();
 
   const logoutHandler = async () => {
     try {

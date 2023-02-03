@@ -1,13 +1,9 @@
 import { Camera, HomeIcon } from "components";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { useSelector } from "react-redux";
-import { RootState } from "store";
+import { useProfileInfo } from "./useProfileInfo";
 
 const ProfileInfo = () => {
-  const { t } = useTranslation("newsfeed");
-
-  const { user } = useSelector((store: RootState) => store?.user);
+  const { t, user } = useProfileInfo();
   return (
     <div className="flex flex-col gap-10 text-white ml-11 mt-10">
       <div className="flex items-center gap-5">
