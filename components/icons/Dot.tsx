@@ -1,4 +1,6 @@
-const Dot: React.FC<{ fill?: string }> = ({ fill = "#9C9A9A" }) => {
+import { DotProps } from "types";
+
+const Dot: React.FC<DotProps> = ({ fill = "#9C9A9A" }) => {
   return (
     <svg
       width="4"

@@ -1,15 +1,11 @@
 import { Google, Input, RedBtn } from "components";
-import { loginValidationSchema } from "schemas";
-
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-
 import { fetchCSRFToken, login } from "services/axios";
-import { Login } from "types";
+import { Login, LoginFormProps } from "types";
 import { useLoginForm } from "./useLoginForm";
 
-const LoginForm: React.FC<{ singupClick: () => void }> = ({ singupClick }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ singupClick }) => {
   const {
     t,
     push,

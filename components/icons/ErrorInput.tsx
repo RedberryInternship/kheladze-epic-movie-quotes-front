@@ -1,4 +1,6 @@
-const ErrorInput: React.FC<{ className?: string }> = ({ className }) => {
+import { ErrorInpuProps } from "types";
+
+const ErrorInput: React.FC<ErrorInpuProps> = ({ className }) => {
   return (
     <svg
       className={`absolute ${className ? className : "top-10 right-7 "}`}

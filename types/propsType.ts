@@ -8,6 +8,8 @@ export type RegisterProps = {
   succesSubmit: (linkTo: string) => void;
 };
 
+export type LoginFormProps = { singupClick: () => void };
+
 export type LandingHeaderProps = {
   login: () => void;
   singup: () => void;
@@ -66,3 +68,7 @@ export type EditNameMailProps = {
 export type EditPasswordProps = { user: User };
 
 export type EmailsProps = { user: User };
+
+export type DotProps = { fill?: string };
+
+export type ErrorInpuProps = { className?: string };
