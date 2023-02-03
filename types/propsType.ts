@@ -39,6 +39,12 @@ export type RedBtnProps = {
   link?: string | null;
 };
 
+export type BlackBtnProps = {
+  click?: () => void;
+  label: string;
+  className?: string;
+};
+
 export type ModalWrapperProps = {
   closeModal?: () => void;
   children: ReactNode;

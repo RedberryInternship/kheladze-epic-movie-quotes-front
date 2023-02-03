@@ -1,8 +1,6 @@
-const BlackBtn: React.FC<{
-  click?: () => void;
-  label: string;
-  className?: string;
-}> = ({ label, click, className }) => {
+import { BlackBtnProps } from "types";
+
+const BlackBtn: React.FC<BlackBtnProps> = ({ label, click, className }) => {
   return (
     <button
       onClick={click}
