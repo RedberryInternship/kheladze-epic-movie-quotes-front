@@ -1,11 +1,10 @@
 import { LangArrow } from "components";
 
-import { useRouter } from "next/router";
-
 import Dropdown from "react-dropdown";
+import { useLangDropdown } from "./useLangDropdown";
 
 const LangDropdown: React.FC<{ className: string }> = ({ className }) => {
-  const router = useRouter();
+  const { router } = useLangDropdown();
   return (
     <div
       className={`flex flex-col text-orangeWhite ${className} cursor-pointer`}

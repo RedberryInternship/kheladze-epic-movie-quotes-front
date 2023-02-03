@@ -1,11 +1,12 @@
 import React from "react";
 import { Backdrop } from "components";
+import { ModalWrapperProps } from "types";
 
-const ModalWrapper: React.FC<{
-  closeModal?: () => void;
-  children: any;
-  className?: string;
-}> = ({ closeModal, children, className }) => {
+const ModalWrapper: React.FC<ModalWrapperProps> = ({
+  closeModal,
+  children,
+  className,
+}) => {
   return (
     <>
       <div

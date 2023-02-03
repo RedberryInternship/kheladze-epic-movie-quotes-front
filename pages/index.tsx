@@ -10,42 +10,35 @@ import {
   Sent,
 } from "components";
 
-import { landingEn, landingKa } from "lang";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps, NextPage } from "next";
+import useHome from "hooks/useHome";
 
-import { useRouter } from "next/router";
-import { useState } from "react";
-
-export default function Home() {
-  const [LoginModal, setLoginModal] = useState(false);
-  const [singUpModal, setSingUpModal] = useState(false);
-  const [checkEmailModal, setCheckEmailModal] = useState(false);
-  const [toMail, setToMail] = useState("");
-  const { locale, query, push, ...rest } = useRouter();
+const Home: NextPage = () => {
   const {
-    get_started,
-    interstellar,
-    interstellar_name,
-    login,
-    movie_quotes,
-    singup,
-    rings,
-    rings_name,
-    tenenbaum,
-    tenenbaum_name,
-    title,
-    activated,
-    go_to_feed,
-    thank_you,
-    check_email,
-    go_to_mail,
-  } = locale === "en" ? landingEn : landingKa;
+    LoginModal,
+    setLoginModal,
+    singUpModal,
+    setSingUpModal,
+    checkEmailModal,
+    setCheckEmailModal,
+    toMail,
+    setToMail,
+    query,
+    push,
+    t,
+  } = useHome();
 
   return (
     <div className="bg-neutral-900">
       <LandingHeader
         login={() => setLoginModal(true)}
         singup={() => setSingUpModal(true)}
-        labels={{ movie_quotes, singup, login }}
+        labels={{
+          movie_quotes: t("movie_quotes"),
+          singup: t("singup"),
+          login: t("login"),
+        }}
       />
       {singUpModal && (
         <ModalWrapper
@@ -88,16 +81,16 @@ export default function Home() {
         >
           <CheckedActivated />
           <h1 className="text-white text-2xl md:text-3xl font-medium">
-            {thank_you}
+            {t("thank_you")}
           </h1>
-          <h3 className="text-white">{activated}</h3>
+          <h3 className="text-white">{t("activated")}</h3>
           <RedBtn
             click={() => {
               push("/");
               setLoginModal(true);
             }}
             className="w-48 md:w-360"
-            label={login}
+            label={t("login")}
           />
         </ModalWrapper>
       )}
@@ -108,30 +101,48 @@ export default function Home() {
         >
           <Sent />
           <h1 className="text-white text-2xl md:text-3xl font-medium">
-            {thank_you}
+            {t("thank_you")}
           </h1>
-          <h3 className="text-white w-2/3 text-center">{check_email}</h3>
-          <RedBtn link={toMail} className="w-48 md:w-360" label={go_to_mail} />
+          <h3 className="text-white w-2/3 text-center">{t("check_email")}</h3>
+          <RedBtn
+            link={toMail}
+            className="w-48 md:w-360"
+            label={t("go_to_mail")}
+          />
         </ModalWrapper>
       )}
 
       <div className="h-screen flex flex-col items-center justify-center md:gap-8">
         <header className="text-orangeWhite font-bold text-2xl md:text-6xl text-center">
-          {title}
+          {t("title")}
         </header>
-        <RedBtn click={() => setSingUpModal(true)} label={get_started} />
+        <RedBtn click={() => setSingUpModal(true)} label={t("get_started")} />
       </div>
       <LandingQuote
         background={"bg-interstellar"}
-        quote={interstellar}
-        movie={interstellar_name}
+        quote={t("interstellar")}
+        movie={t("interstellar_name")}
       />
       <LandingQuote
         background={"bg-tenenbaum"}
-        quote={tenenbaum}
-        movie={tenenbaum_name}
+        quote={t("tenenbaum")}
+        movie={t("tenenbaum_name")}
       />
-      <LandingQuote background={"bg-rings"} quote={rings} movie={rings_name} />
+      <LandingQuote
+        background={"bg-rings"}
+        quote={t("rings")}
+        movie={t("rings_name")}
+      />
     </div>
   );
-}
+};
+
+export const getStaticProps: GetStaticProps = async (context: any) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ["common", "form"])),
+    },
+  };
+};
+
+export default Home;

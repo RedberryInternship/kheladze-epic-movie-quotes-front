@@ -1,27 +1,22 @@
 import { Layout } from "components";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { fetchCSRFToken, logout } from "services/axios";
+import { useAuth } from "hooks";
+import { GetStaticProps, NextPage } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const News: NextPage = () => {
-  const { push } = useRouter();
   return (
     <Layout>
-      <button
-        className="text-white"
-        onClick={() => {
-          fetchCSRFToken().then(() => {
-            logout().then(() => {
-              push("/");
-            });
-          });
-        }}
-      >
-        Log Out
-      </button>
       <form></form>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (context: any) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ["newsfeed"])),
+    },
+  };
 };
 
 export default News;
