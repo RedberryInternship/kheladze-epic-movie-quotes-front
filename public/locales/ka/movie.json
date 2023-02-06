@@ -1,0 +1,16 @@
+{
+  "my_list": "ფილმების სია",
+  "total": "ჯამში",
+  "search": "ძებნა",
+  "add_movie": "ფილმის დამატება",
+  "drag_drop": "ჩააგდეთ ფოტო ან",
+  "choose_file": "აირჩიეთ ფაილი",
+  "movie_description": "ფილმის აღწერა",
+  "quotes": "ციტატები",
+  "view_quote": "ციტატის ნახვა",
+  "edit": "შეცვლა",
+  "delete": "წაშლა",
+  "director": "რეჟისორი",
+  "write_comment": "დაწერეთ კომენტარი",
+  "edit_quote": "ციტატის შეცვლა"
+}

@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-zinc-800 h-86 flex justify-between items-center pl-9 md:pl-16 pr-9 md:pr-16">
+    <div className="bg-zinc-800 h-86 fixed z-10 top-0 w-screen flex justify-between items-center pl-9 md:pl-16 pr-9 md:pr-16">
       <h1 className="text-orangeWhite hidden md:block">{t("movie_quotes")}</h1>
       <Link href={`${route}?sidebar=1`}>
         <Burger className="md:hidden" />

@@ -1,7 +1,6 @@
 import { LeftArrow, RedBtn, Dot, Input, Success } from "components";
 import Link from "next/link";
-import { changePassword, fetchCSRFToken } from "services/axios";
-import { EditPasswordForm, EditPasswordProps } from "types";
+import { EditPasswordProps } from "types";
 import { useEditPassword } from "./useEditPassword";
 
 const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
@@ -14,15 +13,10 @@ const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
     locale,
     back,
     t,
-  } = useEditPassword();
+    onFormSubmit,
+    passwordValidator,
+  } = useEditPassword(user);
 
-  const onFormSubmit = async (data: EditPasswordForm) => {
-    try {
-      await fetchCSRFToken();
-      await changePassword({ ...data, userId: user.id });
-      setShowSuccess(true);
-    } catch (error) {}
-  };
   return (
     <div>
       {showSuccess && (
@@ -34,7 +28,7 @@ const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
           }}
         />
       )}
-      <div className="w-full h-16 flex items-center">
+      <div className="w-full h-16 mt-20 flex items-center">
         <Link className="ml-10" href={"/profile"}>
           <LeftArrow />
         </Link>
@@ -43,12 +37,16 @@ const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
         <div className="w-full flex flex-col items-start bg-neutral-900 border border-gray-600 rounded-md p-6">
           <h3 className="mb-4">{t("password_should_contain")}</h3>
           <div className="flex items-center gap-2 mb-1">
-            <Dot />
-            <p className={`text-sm text-neutral-400`}>{t("or_more")}</p>
+            <Dot fill={passwordValidator().fill} />
+            <p className={`text-sm ${passwordValidator().text}`}>
+              {t("or_more")}
+            </p>
           </div>
           <div className="flex items-center gap-2 ">
-            <Dot />
-            <p className={`text-sm text-neutral-400`}>{t("lowercase")}</p>
+            <Dot fill={passwordValidator().fill} />
+            <p className={`text-sm ${passwordValidator().text}`}>
+              {t("lowercase")}
+            </p>
           </div>
         </div>
         <form

@@ -9,33 +9,24 @@ import {
   NotVerified,
 } from "components";
 import Link from "next/link";
-import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
-import { Email, EmailsProps } from "types";
+import { EmailsProps } from "types";
 import { useEmails } from "./useEmails";
 
 const Emails: React.FC<EmailsProps> = ({ user }) => {
-  const { showSuccess, setShowSuccess, t, asPath, query, locale, back } =
-    useEmails();
+  const {
+    showSuccess,
+    setShowSuccess,
+    t,
+    asPath,
+    query,
+    locale,
+    back,
+    makeEmailPrimary,
+    removeEmail,
+  } = useEmails();
 
   const primaryEmail =
     user.emails && user.emails.filter((email) => email.primary === 1 && email);
-
-  const removeEmail = async (id: any) => {
-    try {
-      await fetchCSRFToken();
-      await deleteEmail(id);
-      back();
-      setShowSuccess(true);
-    } catch (error) {}
-  };
-  const makeEmailPrimary = async (id: any) => {
-    try {
-      await fetchCSRFToken();
-      await makePrimary(id);
-      back();
-      setShowSuccess(true);
-    } catch (error) {}
-  };
 
   return (
     <>
@@ -51,7 +42,7 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
             <Success close={() => setShowSuccess(false)} className="h-14" />
           )}
 
-          <div className="w-full h-16 flex items-center">
+          <div className="w-full h-16 mt-20 flex items-center">
             <Link className="ml-10" href={"/profile"}>
               <LeftArrow />
             </Link>
@@ -60,7 +51,7 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
             <div className="w-full flex flex-col gap-6 border-b border-gray-300 pb-6">
               <h3>{t("primary_email")}</h3>
               <div className="flex justify-between items-center h-12 p-4 rounded-md border border-green-700 bg-green-700 bg-opacity-20">
-                <p>{primaryEmail && primaryEmail[0].email}</p>
+                <p>{primaryEmail && primaryEmail[0]?.email}</p>
                 <Verified />
               </div>
             </div>

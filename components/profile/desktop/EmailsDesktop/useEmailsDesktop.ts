@@ -3,38 +3,32 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
 
-export const useEmails = () => {
-  const { asPath, query, locale, back } = useRouter();
+export const useEmailsDesktop = () => {
+  const { asPath, query, locale, back, push } = useRouter();
   const { t } = useTranslation("profile");
 
   const [showSuccess, setShowSuccess] = useState(false);
-
-  const removeEmail = async (id: string | string[] | undefined) => {
+  const removeEmail = async (id: number) => {
     try {
       await fetchCSRFToken();
       await deleteEmail(id);
-      back();
-      setShowSuccess(true);
+      push(`/profile?success=1`);
     } catch (error) {}
   };
-  const makeEmailPrimary = async (id: string | string[] | undefined) => {
+  const makeEmailPrimary = async (id?: number) => {
     try {
       await fetchCSRFToken();
       await makePrimary(id);
-      back();
-      setShowSuccess(true);
+      push(`/profile?success=1`);
     } catch (error) {}
   };
 
   return {
-    makeEmailPrimary,
-    removeEmail,
-    showSuccess,
-    setShowSuccess,
     t,
-    asPath,
     query,
     locale,
-    back,
+    push,
+    makeEmailPrimary,
+    removeEmail,
   };
 };
