@@ -8,6 +8,11 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
+      <style jsx global>{`
+        body {
+          background-color: rgb(24 24 27);
+        }
+      `}</style>
     </Provider>
   );
 }

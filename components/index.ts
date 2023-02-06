@@ -5,3 +5,4 @@ export * from "./icons";
 export * from "./Input";
 export * from "./layout";
 export * from "./profile";
+export * from "./movie";

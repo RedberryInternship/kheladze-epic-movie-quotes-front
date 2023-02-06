@@ -1,5 +1,5 @@
 import { DefaultTFuncReturn } from "i18next";
-import { ReactNode } from "react";
+import { BaseSyntheticEvent, ReactNode } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { User } from "./global";
 
@@ -37,7 +37,10 @@ export type LandingQuoteProps = {
 export type RedBtnProps = {
   className?: string;
   label: string;
-  click?: () => void;
+  click?:
+    | ((e: Event) => Promise<void>)
+    | ((e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>)
+    | (() => void);
   link?: string | null;
 };
 
@@ -72,3 +75,13 @@ export type EmailsProps = { user: User };
 export type DotProps = { fill?: string };
 
 export type ErrorInpuProps = { className?: string };
+
+export type ReadOnlyProps = {
+  placeholder: string;
+  label: string;
+  className: string;
+};
+
+export type EmailModalProps = {
+  user: User;
+};

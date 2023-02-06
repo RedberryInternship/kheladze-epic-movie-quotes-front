@@ -1,0 +1,16 @@
+{
+  "my_list": "My list of movies",
+  "total": "Total",
+  "search": "Search",
+  "add_movie": "Add movie",
+  "drag_drop": "Drag & drop your image here or",
+  "choose_file": "Choose file",
+  "movie_description": "Movie discription ",
+  "quotes": "Quotes",
+  "view_quote": "view quote",
+  "edit": "Edit",
+  "delete": "Delete",
+  "director": "Director",
+  "write_comment": "Write a comment",
+  "edit_quote": "edit quote"
+}

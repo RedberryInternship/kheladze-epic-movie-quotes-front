@@ -51,7 +51,7 @@ const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
           }}
         />
       )}
-      <div className="w-full h-16 flex items-center">
+      <div className="w-full h-16 mt-20 flex items-center">
         <Link className="ml-10" href={back}>
           <LeftArrow />
         </Link>

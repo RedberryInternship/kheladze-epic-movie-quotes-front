@@ -34,7 +34,7 @@ export const nameValidation = Yup.object({
 
 export const passwordValidation = Yup.object({
   password: Yup.string()
-    .min(4, "მინიმუმ 8 სიმბოლო")
+    .min(7, "მინიმუმ 8 სიმბოლო")
     .max(15, "მაქსიმუმ 15 სიმბოლო")
     .required("სავალდებულო"),
   password_confirmation: Yup.string().oneOf(

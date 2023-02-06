@@ -57,3 +57,17 @@ export const changePassword = async (data: any) => {
   const response = await instance.post("/api/password/change", data);
   return response;
 };
+
+export const uploadUserImage = async (data: any) => {
+  const postImage = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    withCredentials: true,
+    headers: {
+      Accept: "multipart/form-data",
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  const response = await postImage.post("/api/upload/image", data);
+
+  return response;
+};

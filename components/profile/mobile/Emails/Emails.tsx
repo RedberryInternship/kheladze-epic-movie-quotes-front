@@ -51,7 +51,7 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
             <Success close={() => setShowSuccess(false)} className="h-14" />
           )}
 
-          <div className="w-full h-16 flex items-center">
+          <div className="w-full h-16 mt-20 flex items-center">
             <Link className="ml-10" href={"/profile"}>
               <LeftArrow />
             </Link>
@@ -60,7 +60,7 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
             <div className="w-full flex flex-col gap-6 border-b border-gray-300 pb-6">
               <h3>{t("primary_email")}</h3>
               <div className="flex justify-between items-center h-12 p-4 rounded-md border border-green-700 bg-green-700 bg-opacity-20">
-                <p>{primaryEmail && primaryEmail[0].email}</p>
+                <p>{primaryEmail && primaryEmail[0]?.email}</p>
                 <Verified />
               </div>
             </div>

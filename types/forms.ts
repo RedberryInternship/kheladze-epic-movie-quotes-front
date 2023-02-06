@@ -14,6 +14,10 @@ export type EditEmail = {
   email: string;
 };
 
+export type Image = {
+  image: string;
+};
+
 export type EditPasswordForm = {
   password: string;
   password_confirmation: string;

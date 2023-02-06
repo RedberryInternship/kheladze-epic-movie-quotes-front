@@ -13,7 +13,7 @@ const Input: React.FC<InputProps> = ({
   backErr,
   className,
 }) => {
-  const { toggle, setToggle, pathname } = useInput(type);
+  const { toggle, setToggle, pathname, query } = useInput(type);
   let showError = false;
   if (isDirty && !error) {
     showError = false;
@@ -25,14 +25,16 @@ const Input: React.FC<InputProps> = ({
     showError = true;
   }
 
+  const eyeClassName =
+    pathname === "/profile" ? "right-2 bottom-3" : "right-1 bottom-2";
+
   return (
-    <div className="flex flex-col pb-2 relative w-full">
+    <div className="flex flex-col pb-2 relative w-full ">
       <label className="mb-2" htmlFor={name}>
         {label}
-        {!className && <span className="text-red-500"> *</span>}
+        {pathname !== "/profile" && <span className="text-red-500"> *</span>}
       </label>
       {isDirty && !showError && <CheckedInput />}
-
       <input
         className={`${className} focus:outline-none focus:ring-1 focus:border-blue-300 border box-border text-gray-800 rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
@@ -59,9 +61,7 @@ const Input: React.FC<InputProps> = ({
 
       {type === "password" && (
         <div
-          className={`absolute cursor-pointer ${
-            pathname === "/profile" ? "right-2 bottom-3" : "right-1 bottom-2"
-          }`}
+          className={`absolute cursor-pointer ${eyeClassName}`}
           onClick={() => {
             if (toggle === "password") {
               setToggle("text");
