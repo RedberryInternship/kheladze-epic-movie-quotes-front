@@ -9,33 +9,24 @@ import {
   NotVerified,
 } from "components";
 import Link from "next/link";
-import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
-import { Email, EmailsProps } from "types";
+import { EmailsProps } from "types";
 import { useEmails } from "./useEmails";
 
 const Emails: React.FC<EmailsProps> = ({ user }) => {
-  const { showSuccess, setShowSuccess, t, asPath, query, locale, back } =
-    useEmails();
+  const {
+    showSuccess,
+    setShowSuccess,
+    t,
+    asPath,
+    query,
+    locale,
+    back,
+    makeEmailPrimary,
+    removeEmail,
+  } = useEmails();
 
   const primaryEmail =
     user.emails && user.emails.filter((email) => email.primary === 1 && email);
-
-  const removeEmail = async (id: any) => {
-    try {
-      await fetchCSRFToken();
-      await deleteEmail(id);
-      back();
-      setShowSuccess(true);
-    } catch (error) {}
-  };
-  const makeEmailPrimary = async (id: any) => {
-    try {
-      await fetchCSRFToken();
-      await makePrimary(id);
-      back();
-      setShowSuccess(true);
-    } catch (error) {}
-  };
 
   return (
     <>

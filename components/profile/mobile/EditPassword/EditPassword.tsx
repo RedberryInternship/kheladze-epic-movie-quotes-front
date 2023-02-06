@@ -1,7 +1,6 @@
 import { LeftArrow, RedBtn, Dot, Input, Success } from "components";
 import Link from "next/link";
-import { changePassword, fetchCSRFToken } from "services/axios";
-import { EditPasswordForm, EditPasswordProps } from "types";
+import { EditPasswordProps } from "types";
 import { useEditPassword } from "./useEditPassword";
 
 const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
@@ -14,20 +13,10 @@ const EditPassword: React.FC<EditPasswordProps> = ({ user }) => {
     locale,
     back,
     t,
-  } = useEditPassword();
+    onFormSubmit,
+    passwordValidator,
+  } = useEditPassword(user);
 
-  const onFormSubmit = async (data: EditPasswordForm) => {
-    try {
-      await fetchCSRFToken();
-      await changePassword({ ...data, userId: user.id });
-      setShowSuccess(true);
-    } catch (error) {}
-  };
-  const passwordValidator = () => {
-    const fill = errors.password ? "#9C9A9A" : "#198754";
-    const text = errors.password ? "text-neutral-400" : "text-white";
-    return { fill, text };
-  };
   return (
     <div>
       {showSuccess && (

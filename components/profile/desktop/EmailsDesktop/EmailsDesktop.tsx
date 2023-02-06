@@ -1,29 +1,14 @@
 import { Plus, ReadOnly, Success } from "components";
 import Link from "next/link";
-import { deleteEmail, fetchCSRFToken, makePrimary } from "services/axios";
 import { EmailsProps } from "types";
 import { useEmailsDesktop } from "./useEmailsDesktop";
 
 const EmailsDesktop: React.FC<EmailsProps> = ({ user }) => {
-  const { t, query, locale, push } = useEmailsDesktop();
+  const { t, query, locale, push, makeEmailPrimary, removeEmail } =
+    useEmailsDesktop();
 
   const primaryEmail =
     user.emails && user.emails.filter((email) => email.primary === 1 && email);
-
-  const removeEmail = async (id: number) => {
-    try {
-      await fetchCSRFToken();
-      await deleteEmail(id);
-      push(`/profile?success=1`);
-    } catch (error) {}
-  };
-  const makeEmailPrimary = async (id?: number) => {
-    try {
-      await fetchCSRFToken();
-      await makePrimary(id);
-      push(`/profile?success=1`);
-    } catch (error) {}
-  };
 
   return (
     <div className="flex flex-col gap-8">

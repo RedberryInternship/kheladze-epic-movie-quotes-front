@@ -8,14 +8,6 @@ import {
   Success,
 } from "components";
 import Link from "next/link";
-import {
-  changePassword,
-  changeUsername,
-  fetchCSRFToken,
-  uploadUserImage,
-} from "services/axios";
-import { SubmitHandler } from "react-hook-form";
-import { EditEmail, EditPasswordForm } from "types";
 import { useProfileDesktop } from "./useProfileDesktop";
 
 const ProfileDesktop = () => {
@@ -28,65 +20,16 @@ const ProfileDesktop = () => {
     query,
     push,
     nameBackErr,
-    setNameBackErr,
     showSuccess,
     setShowSuccess,
-    image,
     setImage,
-    currentImage,
     setCurrentImage,
+    changeName,
+    editPassword,
+    submit,
+    userImage,
+    passwordValidator,
   } = useProfileDesktop();
-
-  const changeName: SubmitHandler<EditEmail> = async (data) => {
-    try {
-      await fetchCSRFToken();
-      await changeUsername({ name: data.email, userId: query.userId });
-      push("/profile");
-      setShowSuccess(true);
-    } catch (error) {
-      setNameBackErr({ email: "name already exists" });
-    }
-  };
-  const editPassword: SubmitHandler<EditPasswordForm> = async (data) => {
-    try {
-      await fetchCSRFToken();
-      await changePassword({ ...data, userId: query.userId });
-      push("/profile");
-      setShowSuccess(true);
-    } catch (error) {}
-  };
-
-  const uploadImage = async (e: Event) => {
-    let data = new FormData();
-    data.append("image", image);
-    try {
-      await fetchCSRFToken();
-      const res = await uploadUserImage({ image, userId: user.id });
-      push("/profile");
-    } catch (error) {}
-  };
-
-  const submit = () => {
-    if (query.modify === "name") {
-      return nameForm.handleSubmit(changeName);
-    } else if (query.modify === "password") {
-      return passwordForm.handleSubmit(editPassword);
-    } else if (query.modify === "image") {
-      return uploadImage;
-    }
-  };
-  const userImage = () => {
-    if (currentImage) return currentImage;
-    if (user.image) return user.image;
-    return "https://i.pinimg.com/236x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg";
-  };
-  const passwordValidator = () => {
-    const fill = passwordForm.formState.errors.password ? "#9C9A9A" : "#198754";
-    const text = passwordForm.formState.errors.password
-      ? "text-neutral-400"
-      : "text-white";
-    return { fill, text };
-  };
 
   return (
     <>

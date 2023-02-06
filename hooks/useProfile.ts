@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { nameValidation } from "schemas";
 import { EditEmail } from "types";
 import { useState } from "react";
+import { fetchCSRFToken, uploadUserImage } from "services/axios";
 const useProfile = () => {
   const { route, query, asPath, push } = useRouter();
   const { t } = useTranslation("profile");
@@ -24,8 +25,18 @@ const useProfile = () => {
     defaultValues: { email: user.name },
     resolver: yupResolver(nameValidation),
   });
+  const uploadImage = async () => {
+    let data = new FormData();
+    data.append("image", image);
+    try {
+      await fetchCSRFToken();
+      await uploadUserImage({ image, userId: user.id });
+      push("/profile?success=1");
+    } catch (error) {}
+  };
 
   return {
+    uploadImage,
     route,
     query,
     push,

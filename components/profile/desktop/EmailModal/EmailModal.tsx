@@ -1,7 +1,5 @@
 import { Backdrop, Input, RedBtn } from "components";
-import { SubmitHandler } from "react-hook-form";
-import { addEmail, fetchCSRFToken } from "services/axios";
-import { EditEmail, EmailModalProps, User } from "types";
+import { EmailModalProps } from "types";
 import { useEmailModal } from "./useEmailModal";
 
 const EmailModal: React.FC<EmailModalProps> = ({ user }) => {
@@ -12,18 +10,8 @@ const EmailModal: React.FC<EmailModalProps> = ({ user }) => {
     handleSubmit,
     formState: { errors },
     backErrors,
-    setBackErrors,
-  } = useEmailModal();
-
-  const onFormSubmit: SubmitHandler<EditEmail> = async (data) => {
-    try {
-      await fetchCSRFToken();
-      await addEmail({ ...data, userId: user.id });
-      push("profile?success=1");
-    } catch (error) {
-      setBackErrors("email already exists");
-    }
-  };
+    onFormSubmit,
+  } = useEmailModal(user);
 
   return (
     <>

@@ -1,8 +1,6 @@
 import { Input, LeftArrow, RedBtn, Success } from "components";
 import Link from "next/link";
-import { SubmitHandler } from "react-hook-form";
-import { addEmail, changeUsername, fetchCSRFToken } from "services/axios";
-import { EditEmail, EditNameMailProps } from "types";
+import { EditNameMailProps } from "types";
 import { useEditNameMail } from "./useEditNameMail";
 
 const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
@@ -10,35 +8,14 @@ const EditNameMail: React.FC<EditNameMailProps> = ({ label, back, user }) => {
     register,
     handleSubmit,
     formState: { errors },
-    query,
     locale,
     push,
     t,
     backErrors,
-    setBackErrors,
     showSuccess,
     setShowSuccess,
-  } = useEditNameMail();
-
-  const onFormSubmit: SubmitHandler<EditEmail> = async (data) => {
-    if (query.add === "mail") {
-      try {
-        await fetchCSRFToken();
-        await addEmail({ ...data, userId: user?.id });
-        setShowSuccess(true);
-      } catch (error) {
-        setBackErrors({ email: "email already exists" });
-      }
-    } else if (query.edit === "name") {
-      try {
-        await fetchCSRFToken();
-        await changeUsername({ name: data.email, userId: user?.id });
-        setShowSuccess(true);
-      } catch (error) {
-        setBackErrors({ email: "name already exists" });
-      }
-    }
-  };
+    onFormSubmit,
+  } = useEditNameMail(user);
 
   return (
     <div>

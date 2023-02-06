@@ -9,19 +9,9 @@ import {
 } from "components";
 import Link from "next/link";
 import { useProfile } from "hooks";
-import { fetchCSRFToken, uploadUserImage } from "services/axios";
 
 const ProfileMobile = () => {
-  const { route, query, t, user, image, setImage, push } = useProfile();
-  const uploadImage = async () => {
-    let data = new FormData();
-    data.append("image", image);
-    try {
-      await fetchCSRFToken();
-      await uploadUserImage({ image, userId: user.id });
-      push("/profile?success=1");
-    } catch (error) {}
-  };
+  const { route, query, t, user, setImage, push, uploadImage } = useProfile();
 
   return (
     <>
