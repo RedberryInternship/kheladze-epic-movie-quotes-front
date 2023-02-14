@@ -14,5 +14,8 @@
   "activated": "Your account has been activated.",
   "go_to_feed": "Go to my news feed",
   "check_email": "Please check your email and follow the instructions to activate your account.",
-  "go_to_mail": "Go to my email"
+  "go_to_mail": "Go to my email",
+  "you_sure": "Are You Sure?",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }

@@ -1,7 +1,12 @@
 import { DefaultTFuncReturn } from "i18next";
-import { BaseSyntheticEvent, ReactNode } from "react";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { User } from "./global";
+import { BaseSyntheticEvent, MouseEventHandler, ReactNode } from "react";
+import {
+  FieldError,
+  UseFormRegisterReturn,
+  UseFormSetValue,
+} from "react-hook-form";
+import { MovieForm } from "./forms";
+import { Quote, User } from "./global";
 
 export type RegisterProps = {
   loginClick: () => void;
@@ -19,13 +24,14 @@ export type LandingHeaderProps = {
 export type InputProps = {
   name: string;
   type: string;
-  label: string;
+  label?: DefaultTFuncReturn;
   placeholder?: DefaultTFuncReturn;
   register: UseFormRegisterReturn;
   error?: FieldError;
   isDirty?: boolean;
   backErr?: string;
   className?: string;
+  languageLabel?: string;
 };
 
 export type LandingQuoteProps = {
@@ -40,7 +46,8 @@ export type RedBtnProps = {
   click?:
     | ((e: Event) => Promise<void>)
     | ((e?: BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>)
-    | (() => void);
+    | (() => void)
+    | any;
   link?: string | null;
 };
 
@@ -84,4 +91,13 @@ export type ReadOnlyProps = {
 
 export type EmailModalProps = {
   user: User;
+};
+
+export type GenresDropdownProps = {
+  setValue: UseFormSetValue<MovieForm>;
+  close: () => void;
+};
+
+export type QuoteOptionsProps = {
+  quote: Quote;
 };

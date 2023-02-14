@@ -12,6 +12,7 @@ const Input: React.FC<InputProps> = ({
   isDirty,
   backErr,
   className,
+  languageLabel,
 }) => {
   const { toggle, setToggle, pathname, query } = useInput(type);
   let showError = false;
@@ -32,11 +33,18 @@ const Input: React.FC<InputProps> = ({
     <div className="flex flex-col pb-2 relative w-full ">
       <label className="mb-2" htmlFor={name}>
         {label}
-        {pathname !== "/profile" && <span className="text-red-500"> *</span>}
+        {pathname === "/" && <span className="text-red-500"> *</span>}
+        {pathname === "/movies" && (
+          <span className="text-gray-500 absolute right-2 top-4">
+            {languageLabel}
+          </span>
+        )}
       </label>
       {isDirty && !showError && <CheckedInput />}
       <input
-        className={`${className} focus:outline-none focus:ring-1 focus:border-blue-300 border box-border text-gray-800 rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
+        className={`${className} focus:outline-none focus:ring-1 focus:border-blue-300 border box-border ${
+          pathname !== "/movies" && "text-gray-800"
+        } rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
         ${isDirty && !showError && "border-green-700 focus:border-green-700"} 
         `}
@@ -45,7 +53,8 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder ? placeholder : ""}
         {...register}
       />
-      {showError && (
+
+      {showError && pathname !== "/movies" && (
         <>
           <ErrorInput
             className={`${pathname === "/profile" ? "top-12 right-9" : ""}`}

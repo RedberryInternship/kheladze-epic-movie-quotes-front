@@ -1,5 +1,4 @@
 import { Layout } from "components";
-import { useAuth } from "hooks";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 

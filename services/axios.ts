@@ -8,6 +8,14 @@ const instance = axios.create({
     "Content-Type": "application/json",
   },
 });
+const multipartInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
+  headers: {
+    Accept: "multipart/form-data",
+    "Content-Type": "multipart/form-data",
+  },
+});
 
 export const fetchCSRFToken = async () => {
   const response = await instance.get("/sanctum/csrf-cookie");
@@ -59,15 +67,46 @@ export const changePassword = async (data: any) => {
 };
 
 export const uploadUserImage = async (data: any) => {
-  const postImage = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    withCredentials: true,
-    headers: {
-      Accept: "multipart/form-data",
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  const response = await postImage.post("/api/upload/image", data);
+  const response = await multipartInstance.post("/api/upload/image", data);
+  return response;
+};
 
+export const getGenres = async () => {
+  const response = await instance.get("/api/genres");
+  return response;
+};
+
+export const createMovie = async (data: any) => {
+  const response = await multipartInstance.post("/api/movie/create", data);
+  return response;
+};
+
+export const editMovie = async (data: any) => {
+  const response = await multipartInstance.post("/api/movie/update", data);
+  return response;
+};
+
+export const deleteMovie = async (data: any) => {
+  const response = await instance.post("/api/movie/delete", data);
+  return response;
+};
+
+export const getMovies = async () => {
+  const response = await instance.get("/api/movie");
+  return response;
+};
+
+export const createQuote = async (data: any) => {
+  const response = await multipartInstance.post("/api/quote/create", data);
+  return response;
+};
+
+export const editQuote = async (data: any) => {
+  const response = await multipartInstance.post("/api/quote/update", data);
+  return response;
+};
+
+export const deleteQuote = async (data: any) => {
+  const response = await instance.post("/api/quote/delete", data);
   return response;
 };
