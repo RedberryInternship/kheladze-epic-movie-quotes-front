@@ -3,6 +3,7 @@
   "total": "ჯამში",
   "search": "ძებნა",
   "add_movie": "ფილმის დამატება",
+  "edit_movie": "შეცვლა",
   "drag_drop": "ჩააგდეთ ფოტო ან",
   "choose_file": "აირჩიეთ ფაილი",
   "movie_description": "ფილმის აღწერა",
@@ -12,5 +13,11 @@
   "delete": "წაშლა",
   "director": "რეჟისორი",
   "write_comment": "დაწერეთ კომენტარი",
-  "edit_quote": "ციტატის შეცვლა"
+  "edit_quote": "ციტატის შეცვლა",
+  "no_more_genres": "ჟანრები ამოიწურა",
+  "genres": "ჟანრები",
+  "upload_image": "ფოტოს ატვირთვა ",
+  "budget": "ბიუჯეტი",
+  "year": "წელი",
+  "add_quote": "ციტატის დამატება"
 }

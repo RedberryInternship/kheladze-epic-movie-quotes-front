@@ -42,3 +42,22 @@ export const passwordValidation = Yup.object({
     "Passwords must match"
   ),
 });
+
+export const movieValidationSchema = Yup.object({
+  name_en: Yup.string().required("სავალდებულო"),
+  name_ka: Yup.string().required("სავალდებულო"),
+  genres: Yup.string().required("სავალდებულო"),
+  director_en: Yup.string().required("სავალდებულო"),
+  director_ka: Yup.string().required("სავალდებულო"),
+  description_en: Yup.string().required("სავალდებულო"),
+  description_ka: Yup.string().required("სავალდებულო"),
+  budget: Yup.string().required("სავალდებულო"),
+  year: Yup.string().required("სავალდებულო"),
+  image: Yup.mixed().required("სავალდებულო"),
+});
+
+export const quoteValidatonSchema = Yup.object({
+  quote_en: Yup.string().required("სავალდებულო"),
+  quote_ka: Yup.string().required("სავალდებულო"),
+  image: Yup.mixed().required("სავალდებულო"),
+});

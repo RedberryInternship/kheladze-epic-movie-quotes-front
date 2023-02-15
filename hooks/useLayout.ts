@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { me } from "services/axios";
-import { storeUser } from "store";
+import { getGenres, getMovies, me } from "services/axios";
+import { storeGenres, storeMovies, storeUser } from "store";
 
-const useAuth = () => {
+const useLayout = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [user, setUser] = useState(null);
@@ -21,10 +21,19 @@ const useAuth = () => {
         }
       }
     };
+    const movies = async () => {
+      const movie = await getMovies();
+      dispatch(storeMovies(movie.data));
+      const genres = await getGenres();
+      dispatch(storeGenres(genres.data[`${router.locale}`]));
+    };
+    if (router.pathname.includes("/movies")) {
+      movies();
+    }
     checkAuth();
   }, [router]);
 
   return user;
 };
 
-export default useAuth;
+export default useLayout;

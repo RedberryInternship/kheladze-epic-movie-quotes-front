@@ -13,7 +13,7 @@ const LangDropdown: React.FC<{ className: string }> = ({ className }) => {
         className="text-orangeWhite"
         controlClassName=""
         onChange={(e) =>
-          router.push(router.pathname, router.pathname, { locale: e.value })
+          router.push(router.asPath, router.asPath, { locale: e.value })
         }
         arrowClosed={<LangArrow isOpen={false} />}
         arrowOpen={<LangArrow isOpen={true} />}

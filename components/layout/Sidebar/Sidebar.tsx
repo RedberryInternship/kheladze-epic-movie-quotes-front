@@ -2,13 +2,12 @@ import { Modal, ProfileInfo } from "components";
 import { useSidebar } from "./useSidebar";
 
 const Sidebar: React.FC<{ user?: string }> = ({ user }) => {
-  const { push, route, query } = useSidebar();
-
+  const { back, query } = useSidebar();
   return (
     <div>
       <div className="md:hidden block">
         {query.sidebar && (
-          <Modal closeModal={() => push(route)}>
+          <Modal closeModal={back}>
             <ProfileInfo />
           </Modal>
         )}

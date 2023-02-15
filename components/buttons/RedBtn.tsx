@@ -1,3 +1,4 @@
+import { Plus } from "components";
 import { RedBtnProps } from "types";
 
 const RedBtn: React.FC<RedBtnProps> = ({
@@ -11,6 +12,7 @@ const RedBtn: React.FC<RedBtnProps> = ({
       onClick={click}
       className={`bg-red-600 h-10 rounded text-white text-base relative ${className}`}
     >
+      {className.includes("plus") && <Plus />}
       {label}
       {link && (
         <a

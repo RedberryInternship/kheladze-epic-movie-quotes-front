@@ -3,14 +3,21 @@
   "total": "Total",
   "search": "Search",
   "add_movie": "Add movie",
+  "edit_movie": "Edit movie",
   "drag_drop": "Drag & drop your image here or",
   "choose_file": "Choose file",
   "movie_description": "Movie discription ",
   "quotes": "Quotes",
-  "view_quote": "view quote",
+  "view_quote": "View Quote",
   "edit": "Edit",
   "delete": "Delete",
   "director": "Director",
   "write_comment": "Write a comment",
-  "edit_quote": "edit quote"
+  "edit_quote": "edit quote",
+  "no_more_genres": "no more genres",
+  "genres": "Genres",
+  "upload_image": "Upload image ",
+  "budget": "Budget",
+  "year": "Year",
+  "add_quote": "Add quote"
 }
