@@ -5,5 +5,16 @@
   "news": "News feed",
   "list_movies": "List of movies",
   "write_new": "Write new quote",
-  "search_by": "Search by"
+  "search_by": "Search by",
+  "cancel": "Cancel",
+  "enter@": "Enter @ to search movies",
+  "enter#": "Enter # to search quotes",
+  "search": "Enter @ to search movies, Enter # to search quotes ",
+  "drag_drop": "Drag & drop your image here or",
+  "choose_file": "Choose file",
+  "choose_movie": "Choose movie",
+  "commented": "Commented to your  quote..",
+  "reacted": "Reacted  to your  quote",
+  "mark_as_read": "Mark  as all read",
+  "notifications": "Notifications"
 }

@@ -110,3 +110,48 @@ export const deleteQuote = async (data: any) => {
   const response = await instance.post("/api/quote/delete", data);
   return response;
 };
+
+export const getQuotes = async (page: number, searchTerm?: string) => {
+  let query = `/api/quote?page=${page}`;
+  if (searchTerm) {
+    if (searchTerm.includes("#")) {
+      query = `/api/quote?page=${page}${
+        searchTerm && `&search=%23${searchTerm.slice(1)}`
+      }`;
+    } else if (searchTerm.includes("@")) {
+      query = `/api/quote?page=${page}${searchTerm && `&search=${searchTerm}`}`;
+    }
+  }
+  const response = await instance.get(query);
+  return response;
+};
+
+export const addComment = async (data: any) => {
+  const response = await multipartInstance.post("/api/comment/add", data);
+  return response;
+};
+
+export const addLike = async (data: any) => {
+  const response = await multipartInstance.post("/api/like/add", data);
+  return response;
+};
+
+export const unLike = async (data: any) => {
+  const response = await instance.post("/api/like/remove", data);
+  return response;
+};
+
+export const googleLogin = async (data: any) => {
+  const response = await instance.post("/api/google-login", data);
+  return response;
+};
+
+export const markAsRead = async () => {
+  const response = await instance.post("/api/notification");
+  return response;
+};
+
+export const readNotification = async (data: any) => {
+  const response = await instance.post("/api/notification/read", data);
+  return response;
+};

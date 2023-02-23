@@ -1,7 +1,11 @@
-const LangArrow: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+import { LangArrowProps } from "types";
+
+const LangArrow: React.FC<LangArrowProps> = ({ isOpen, absolute }) => {
   return (
     <svg
-      className={`${isOpen ? "rotate-180" : ""} absolute -right-4 top-0 mt-2`}
+      className={`${isOpen ? "rotate-180" : ""} ${
+        !absolute && "absolute"
+      }  -right-4 top-0 mt-2`}
       width="12"
       height="8"
       viewBox="0 0 12 8"

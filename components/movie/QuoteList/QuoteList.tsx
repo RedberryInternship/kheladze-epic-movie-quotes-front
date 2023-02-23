@@ -25,11 +25,11 @@ const QuoteList: React.FC<{ quotes: Quote[] }> = ({ quotes }) => {
 
       <div className="text-xl flex items-center lg:h-20 h-16 border-t border-gray-300 gap-6 lg:gap-8">
         <button className="flex lg:gap-4 gap-3">
-          10
+          {quote.comments.length}
           <CommentsIcon className="lg:w-8 w-6" />
         </button>
         <button className="flex lg:gap-4 gap-3">
-          10
+          {quote.likes.length}
           <LikesIcon className="lg:w-8 w-6" />
         </button>
       </div>

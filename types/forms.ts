@@ -42,4 +42,5 @@ export type QuoteForm = {
   quote_en: string;
   quote_ka: string;
   image: string;
+  movieId?: number;
 };

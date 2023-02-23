@@ -12,6 +12,7 @@ import { useProfile } from "hooks";
 
 const ProfileMobile = () => {
   const { route, query, t, user, setImage, push, uploadImage } = useProfile();
+  const googleUser = user.google_id;
 
   return (
     <>
@@ -25,11 +26,7 @@ const ProfileMobile = () => {
           <div className="w-full pl-8 pr-8 bg-zinc-800 rounded-xl flex flex-col items-center">
             <img
               className="w-40 h-40 rounded-full mb-2 mt-10"
-              src={
-                user.image
-                  ? user.image
-                  : "https://i.pinimg.com/236x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg"
-              }
+              src={user.image && user.image}
             />
             <form className="mb-14">
               <label
@@ -57,30 +54,43 @@ const ProfileMobile = () => {
                 </Link>
               </div>
             </div>
-            <div className="border-b border-gray-300 w-full pb-4">
-              <p>{t("password")}</p>
-              <div className="flex justify-between">
-                <p>••••••••••••</p>
-                <Link href={`${route}?edit=password`} className="text-lg">
-                  {t("edit")}
-                </Link>
+            {googleUser && (
+              <div className="border-b border-gray-300 w-full pb-4 mb-8">
+                <p>{t("email")}</p>
+                <div className="flex justify-between">
+                  <p className="text-lg">{user.emails[0].email}</p>
+                </div>
               </div>
-            </div>
-            <p className="w-full mt-8 pb-20 flex justify-between">
-              <span>{t("email")}</span>
-              <Link href={`${route}?edit=mail`}>
-                <RightArrow />
-              </Link>
-            </p>
-            {query.upload === "image" && (
-              <div className="flex justify-end gap-8 pb-6 mt-10 mr-3 items-center">
-                <Link href={"/profile"}>{t("cancel")}</Link>
-                <RedBtn
-                  click={uploadImage}
-                  className="pl-3 pr-3"
-                  label={t("save_changes")}
-                />
-              </div>
+            )}
+
+            {!googleUser && (
+              <>
+                <div className="border-b border-gray-300 w-full pb-4">
+                  <p>{t("password")}</p>
+                  <div className="flex justify-between">
+                    <p>••••••••••••</p>
+                    <Link href={`${route}?edit=password`} className="text-lg">
+                      {t("edit")}
+                    </Link>
+                  </div>
+                </div>
+                <p className="w-full mt-8 pb-20 flex justify-between">
+                  <span>{t("email")}</span>
+                  <Link href={`${route}?edit=mail`}>
+                    <RightArrow />
+                  </Link>
+                </p>
+                {query.upload === "image" && (
+                  <div className="flex justify-end gap-8 pb-6 mt-10 mr-3 items-center">
+                    <Link href={"/profile"}>{t("cancel")}</Link>
+                    <RedBtn
+                      click={uploadImage}
+                      className="pl-3 pr-3"
+                      label={t("save_changes")}
+                    />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

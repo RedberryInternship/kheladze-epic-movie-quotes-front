@@ -12,7 +12,7 @@ export const useQuoteOptions = (quote: Quote) => {
   const quoteDelete = async () => {
     try {
       await fetchCSRFToken();
-      await deleteQuote({ quoteId: quote.id });
+      await deleteQuote({ quoteId: router.query.id });
       router.back();
     } catch (error) {}
   };

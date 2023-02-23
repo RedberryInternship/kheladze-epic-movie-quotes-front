@@ -40,7 +40,7 @@ const QuoteOptions: React.FC<QuoteOptionsProps> = ({ quote }) => {
               {t("edit")}
             </Link>
             <Link
-              href={`${router.asPath}&delete=quote`}
+              href={`${router.asPath}&delete=quote&id=${quote.id}`}
               onClick={() => {
                 setOpen(false);
               }}
