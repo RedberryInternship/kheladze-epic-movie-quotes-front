@@ -11,7 +11,6 @@ import {
 import Link from "next/link";
 import { useNavbar } from "./useNavbar";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const Navbar = () => {
   const {
@@ -23,8 +22,9 @@ const Navbar = () => {
     openSearch,
     setOpenSearch,
     onSearchSubmit,
+    openNotifications,
+    setOpenNotifications,
   } = useNavbar();
-  const [openNotifications, setOpenNotifications] = useState(false);
 
   return (
     <>

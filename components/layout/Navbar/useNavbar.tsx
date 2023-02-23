@@ -11,6 +11,8 @@ export const useNavbar = () => {
   const { t } = useTranslation("newsfeed");
 
   const [inputVal, setInputVal] = useState("");
+  const [openNotifications, setOpenNotifications] = useState(false);
+
   const dispatch = useDispatch();
 
   const logoutHandler = async () => {
@@ -26,7 +28,18 @@ export const useNavbar = () => {
 
   const onSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const searchedQuotes = await getQuotes(1, inputVal);
+    let query = "/api/quote?page=1";
+    if (inputVal) {
+      if (inputVal.includes("#")) {
+        query = `/api/quote?page=1${
+          inputVal && `&search=%23${inputVal.slice(1)}`
+        }`;
+      } else if (inputVal.includes("@")) {
+        query = `/api/quote?page=1${inputVal && `&search=${inputVal}`}`;
+      }
+    }
+
+    const searchedQuotes = await getQuotes(query);
     dispatch(storeQuotes(searchedQuotes.data));
     dispatch(storeSearchTerm(inputVal));
     setOpenSearch(false);
@@ -47,5 +60,7 @@ export const useNavbar = () => {
     openSearch,
     setOpenSearch,
     onSearchSubmit,
+    openNotifications,
+    setOpenNotifications,
   };
 };

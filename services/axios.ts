@@ -111,17 +111,7 @@ export const deleteQuote = async (data: any) => {
   return response;
 };
 
-export const getQuotes = async (page: number, searchTerm?: string) => {
-  let query = `/api/quote?page=${page}`;
-  if (searchTerm) {
-    if (searchTerm.includes("#")) {
-      query = `/api/quote?page=${page}${
-        searchTerm && `&search=%23${searchTerm.slice(1)}`
-      }`;
-    } else if (searchTerm.includes("@")) {
-      query = `/api/quote?page=${page}${searchTerm && `&search=${searchTerm}`}`;
-    }
-  }
+export const getQuotes = async (query: string) => {
   const response = await instance.get(query);
   return response;
 };

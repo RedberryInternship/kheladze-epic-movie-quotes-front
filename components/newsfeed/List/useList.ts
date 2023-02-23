@@ -13,7 +13,7 @@ export const useList = () => {
 
   const fetchQuotes = async (initial?: boolean) => {
     if (!searchTerm || searchTerm.length < 2) {
-      const quote = await getQuotes(page);
+      const quote = await getQuotes(`/api/quote?page=${page}`);
       if (initial) {
         dispatch(storeQuotes(quote.data));
       } else {
