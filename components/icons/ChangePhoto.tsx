@@ -15,7 +15,7 @@ const ChangePhoto = () => {
           fill="url(#paint0_linear_660_31925)"
         />
       </g>
-      <g clip-path="url(#clip0_660_31925)">
+      <g clipPath="url(#clip0_660_31925)">
         <path
           d="M76.1666 33.8333C76.1666 34.2754 75.991 34.6993 75.6784 35.0118C75.3659 35.3244 74.9419 35.5 74.4999 35.5H59.4999C59.0579 35.5 58.634 35.3244 58.3214 35.0118C58.0088 34.6993 57.8333 34.2754 57.8333 33.8333V24.6667C57.8333 24.2246 58.0088 23.8007 58.3214 23.4882C58.634 23.1756 59.0579 23 59.4999 23H62.8333L64.4999 20.5H69.4999L71.1666 23H74.4999C74.9419 23 75.3659 23.1756 75.6784 23.4882C75.991 23.8007 76.1666 24.2246 76.1666 24.6667V33.8333Z"
           stroke="white"
@@ -43,9 +43,9 @@ const ChangePhoto = () => {
           width="235"
           height="184"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feGaussianBlur in="BackgroundImageFix" stdDeviation="25" />
           <feComposite
             in2="SourceAlpha"
@@ -67,9 +67,9 @@ const ChangePhoto = () => {
           y2="95.798"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.000718772" stop-color="#181623" />
-          <stop offset="0.50664" stop-color="#191725" />
-          <stop offset="0.96875" stop-color="#0D0B14" />
+          <stop offset="0.000718772" stopColor="#181623" />
+          <stop offset="0.50664" stopColor="#191725" />
+          <stop offset="0.96875" stopColor="#0D0B14" />
         </linearGradient>
         <clipPath id="clip0_660_31925">
           <rect

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
+import { fetchCSRFToken, googleLogin } from "services/axios";
 
 const useHome = () => {
   const [LoginModal, setLoginModal] = useState(false);
@@ -9,6 +10,17 @@ const useHome = () => {
   const [toMail, setToMail] = useState("");
   const { locale, query, push } = useRouter();
   const { t } = useTranslation("common");
+  const googleAuth = async () => {
+    try {
+      await fetchCSRFToken();
+      await googleLogin({ id: query.googleuser });
+      push("/news-feed");
+    } catch (err: any) {}
+  };
+  if (query.googleuser) {
+    googleAuth();
+  }
+
   return {
     LoginModal,
     setLoginModal,

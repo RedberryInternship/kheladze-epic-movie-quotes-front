@@ -1,11 +1,18 @@
-import { Layout } from "components";
+import { AddQuote, Layout, List, NewsHeader, ViewQuote } from "components";
 import { GetStaticProps, NextPage } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 
 const News: NextPage = () => {
+  const { query } = useRouter();
   return (
     <Layout>
-      <form></form>
+      <div className="w-full h-full mt-24 flex flex-col items-center lg:pl-80">
+        <NewsHeader />
+        <List />
+        {query.add === "quote" && <AddQuote />}
+        {query.viewquote && <ViewQuote />}
+      </div>
     </Layout>
   );
 };

@@ -20,7 +20,6 @@ const Emails: React.FC<EmailsProps> = ({ user }) => {
     asPath,
     query,
     locale,
-    back,
     makeEmailPrimary,
     removeEmail,
   } = useEmails();

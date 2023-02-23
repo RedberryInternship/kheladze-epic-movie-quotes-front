@@ -17,5 +17,6 @@
   "go_to_mail": "Go to my email",
   "you_sure": "Are You Sure?",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "search": "Enter @ to search movies, Enter # to search quotes "
 }

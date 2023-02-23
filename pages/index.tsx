@@ -13,6 +13,7 @@ import {
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, NextPage } from "next";
 import useHome from "hooks/useHome";
+import { fetchCSRFToken, googleLogin } from "services/axios";
 
 const Home: NextPage = () => {
   const {

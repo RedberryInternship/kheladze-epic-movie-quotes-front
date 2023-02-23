@@ -101,3 +101,7 @@ export type GenresDropdownProps = {
 export type QuoteOptionsProps = {
   quote: Quote;
 };
+
+export type LangArrowProps = { isOpen: boolean; absolute?: boolean };
+
+export type QuoteCardProps = { quote: Quote; loggedInUser: User };

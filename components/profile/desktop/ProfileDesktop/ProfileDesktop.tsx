@@ -102,22 +102,24 @@ const ProfileDesktop = () => {
               </Link>
             </div>
             <EmailsDesktop user={user} />
+            {!user.google_id && (
+              <div className="flex gap-8 items-end mt-8 mb-8">
+                <ReadOnly
+                  label={t("password")}
+                  placeholder={"••••••••••••"}
+                  className="bg-gray-300 text-neutral-800"
+                />
+                {query.modify !== "password" && (
+                  <Link
+                    className="h-12 flex items-center mb-1"
+                    href={`/profile?modify=password&userId=${user.id}`}
+                  >
+                    {t("edit")}
+                  </Link>
+                )}
+              </div>
+            )}
 
-            <div className="flex gap-8 items-end mt-8 mb-8">
-              <ReadOnly
-                label={t("password")}
-                placeholder={"••••••••••••"}
-                className="bg-gray-300 text-neutral-800"
-              />
-              {query.modify !== "password" && (
-                <Link
-                  className="h-12 flex items-center mb-1"
-                  href={`/profile?modify=password&userId=${user.id}`}
-                >
-                  {t("edit")}
-                </Link>
-              )}
-            </div>
             {query.modify === "password" && (
               <>
                 <div className="w-528 flex flex-col items-start mb-8 bg-neutral-900 border border-gray-600 rounded-md p-6">

@@ -73,7 +73,6 @@ export const useProfileDesktop = () => {
   const userImage = () => {
     if (currentImage) return currentImage;
     if (user.image) return user.image;
-    return "https://i.pinimg.com/236x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg";
   };
   const passwordValidator = () => {
     const fill = passwordForm.formState.errors.password ? "#9C9A9A" : "#198754";

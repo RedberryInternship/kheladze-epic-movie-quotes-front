@@ -61,3 +61,10 @@ export const quoteValidatonSchema = Yup.object({
   quote_ka: Yup.string().required("სავალდებულო"),
   image: Yup.mixed().required("სავალდებულო"),
 });
+
+export const quoteSchema = Yup.object({
+  quote_en: Yup.string().required("სავალდებულო"),
+  quote_ka: Yup.string().required("სავალდებულო"),
+  image: Yup.mixed().required("სავალდებულო"),
+  movieId: Yup.number().required("სავალდებულო"),
+});

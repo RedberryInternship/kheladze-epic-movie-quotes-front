@@ -30,3 +30,6 @@ export { default as CommentsIcon } from "./CommentsIcon";
 export { default as LikesIcon } from "./LikesIcon";
 export { default as ViewQuoteIcon } from "./ViewQuoteIcon";
 export { default as ChangePhoto } from "./ChangePhoto";
+export { default as WriteNewQuoteIcon } from "./WriteNewQuoteIcon";
+export { default as LikeFilled } from "./LikeFilled";
+export { default as NotificationPointerIcon } from "./NotificationPointerIcon";

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useProfileInfo } from "./useProfileInfo";
 
 const ProfileInfo = () => {
-  const { t, user } = useProfileInfo();
+  const { t, user, pathname } = useProfileInfo();
+
   return (
     <div className="flex flex-col gap-10 text-white ml-11 mt-10">
       <div className="flex items-center gap-5">
@@ -21,11 +22,11 @@ const ProfileInfo = () => {
         </div>
       </div>
       <div className="ml-3 flex gap-7 items-center">
-        <HomeIcon />
+        <HomeIcon color={pathname === "/news-feed" ? "#E31221" : "white"} />
         <Link href={"/news-feed"}>{t("news")}</Link>
       </div>
       <div className="ml-3 flex gap-7 items-center">
-        <Camera />
+        <Camera color={pathname === "/movies" ? "#E31221" : "white"} />
         <Link href={"/movies"}>{t("list_movies")}</Link>
       </div>
     </div>
