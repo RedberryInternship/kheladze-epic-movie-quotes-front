@@ -50,23 +50,21 @@ const useLayout = () => {
         key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
         cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
         forceTLS: true,
-        authorizer: (channel: any, options: any) => {
+        authorizer: (channel: { name: string }) => {
           return {
-            authorize: async (socketId: any, callback: any) => {
-              instance
-                .post(
+            authorize: async (socketId: number, callback: Function) => {
+              try {
+                const response = await instance.post(
                   `${process.env.NEXT_PUBLIC_API_URL}/api/broadcasting/auth`,
                   {
                     socket_id: socketId,
                     channel_name: channel.name,
                   }
-                )
-                .then((response) => {
-                  callback(false, response.data);
-                })
-                .catch((error) => {
-                  callback(true, error);
-                });
+                );
+                callback(false, response.data);
+              } catch (error) {
+                callback(true, error);
+              }
             },
           };
         },
