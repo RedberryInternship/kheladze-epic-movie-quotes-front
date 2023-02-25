@@ -24,6 +24,7 @@ const Navbar = () => {
     onSearchSubmit,
     openNotifications,
     setOpenNotifications,
+    newNotifications,
   } = useNavbar();
 
   return (
@@ -53,6 +54,12 @@ const Navbar = () => {
             onClick={() => setOpenNotifications(true)}
           >
             <Ring />
+            {newNotifications && newNotifications.length !== 0 && (
+              <span className="absolute -top-3 -right-3 rounded-full bg-red-600 w-6 h-6 flex items-center justify-center">
+                {newNotifications.length}
+              </span>
+            )}
+
             {openNotifications && (
               <NotificationPointerIcon className="absolute -bottom-12 -right-2" />
             )}
@@ -98,7 +105,7 @@ const Navbar = () => {
       {openNotifications && (
         <>
           <div className="rounded-xl lg:w-961 pt-5 lg:pt-10 pl-8 pr-8 lg:pb-14 pb-9 overflow-scroll w-screen lg:right-14 right-0 top-24 lg:h-704 h-471 z-40 flex flex-col fixed bg-black">
-            <Notifications />
+            <Notifications closeModal={setOpenNotifications} />
           </div>
           <div
             onClick={() => setOpenNotifications(false)}

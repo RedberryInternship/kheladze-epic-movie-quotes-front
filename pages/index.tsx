@@ -13,7 +13,6 @@ import {
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, NextPage } from "next";
 import useHome from "hooks/useHome";
-import { fetchCSRFToken, googleLogin } from "services/axios";
 
 const Home: NextPage = () => {
   const {
@@ -71,6 +70,23 @@ const Home: NextPage = () => {
               setLoginModal(false);
               setSingUpModal(true);
             }}
+          />
+        </ModalWrapper>
+      )}
+      {query.email === "email_already_exists" && (
+        <ModalWrapper
+          className="h-96 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
+          closeModal={() => push("/")}
+        >
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {t("exists")}
+          </h1>
+          <RedBtn
+            click={() => {
+              push("/");
+            }}
+            className="w-48 md:w-360"
+            label={t("cancel")}
           />
         </ModalWrapper>
       )}

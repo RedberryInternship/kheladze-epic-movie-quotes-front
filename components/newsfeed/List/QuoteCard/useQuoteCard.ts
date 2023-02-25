@@ -15,14 +15,28 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
   const { locale } = useRouter();
   const l = locale === "en" ? "en" : "ka";
   const [commentVal, setCommentVal] = useState("");
+  const [tempComment, setTempComment] = useState<{
+    comment: string;
+    image: string;
+    username: string;
+  }>({
+    username: "",
+    comment: "",
+    image: "",
+  });
   const dispatch = useDispatch();
   const reFetchQuotes = async () => {
-    const quote = await getQuotes(1);
+    const quote = await getQuotes("/api/quote?page=1");
     dispatch(storeQuotes(quote.data));
   };
   const onCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setTempComment({
+        comment: commentVal,
+        image: loggedInUser.image,
+        username: loggedInUser.name,
+      });
       await fetchCSRFToken();
       await addComment({
         comment: commentVal,
@@ -31,7 +45,12 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
         userId: quote.movies.users?.id,
       });
       setCommentVal("");
-      reFetchQuotes();
+      await reFetchQuotes();
+      setTempComment({
+        comment: "",
+        image: "",
+        username: "",
+      });
     } catch (error) {}
   };
 
@@ -39,12 +58,16 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
     (like) => Number(like.user_id) === loggedInUser.id
   );
 
+  const [tempLike, setTempLike] = useState(liked);
+
   const like = async (data: any) => {
     try {
       if (liked) {
         await fetchCSRFToken();
         await unLike({ userId: loggedInUser.id, quoteId: quote.id });
+        setTempLike(false);
       } else {
+        setTempLike(true);
         await fetchCSRFToken();
         await addLike(data);
       }
@@ -59,6 +82,7 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
     reFetchQuotes,
     onCommentSubmit,
     like,
-    liked,
+    tempLike,
+    tempComment,
   };
 };

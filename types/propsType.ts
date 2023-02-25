@@ -1,5 +1,11 @@
 import { DefaultTFuncReturn } from "i18next";
-import { BaseSyntheticEvent, MouseEventHandler, ReactNode } from "react";
+import {
+  BaseSyntheticEvent,
+  Dispatch,
+  MouseEventHandler,
+  ReactNode,
+  SetStateAction,
+} from "react";
 import {
   FieldError,
   UseFormRegisterReturn,
@@ -105,3 +111,7 @@ export type QuoteOptionsProps = {
 export type LangArrowProps = { isOpen: boolean; absolute?: boolean };
 
 export type QuoteCardProps = { quote: Quote; loggedInUser: User };
+
+export type NotificationsProps = {
+  closeModal: Dispatch<SetStateAction<boolean>>;
+};
