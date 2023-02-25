@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import { fetchCSRFToken, getQuotes, logout } from "services/axios";
-import { useDispatch } from "react-redux";
-import { storeQuotes, storeSearchTerm } from "store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, storeQuotes, storeSearchTerm } from "store";
 
 export const useNavbar = () => {
   const router = useRouter();
@@ -23,6 +23,11 @@ export const useNavbar = () => {
       router.push("/");
     } catch (error) {}
   };
+  const notifications = useSelector(
+    (store: RootState) => store.user.user.notifications
+  );
+  const newNotifications =
+    notifications && notifications.filter((n) => n.is_new === 1);
 
   const [openSearch, setOpenSearch] = useState(false);
 
@@ -62,5 +67,6 @@ export const useNavbar = () => {
     onSearchSubmit,
     openNotifications,
     setOpenNotifications,
+    newNotifications,
   };
 };

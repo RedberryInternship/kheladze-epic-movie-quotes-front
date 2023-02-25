@@ -1,10 +1,17 @@
 import { CommentsIcon, LikeFilled, LikesIcon } from "components/icons";
-import { Quote, QuoteCardProps, User } from "types";
+import { QuoteCardProps } from "types";
 import { useQuoteCard } from "./useQuoteCard";
 
 const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
-  const { l, commentVal, setCommentVal, onCommentSubmit, like, liked } =
-    useQuoteCard(quote, loggedInUser);
+  const {
+    l,
+    commentVal,
+    setCommentVal,
+    onCommentSubmit,
+    like,
+    tempLike,
+    tempComment,
+  } = useQuoteCard(quote, loggedInUser);
 
   const commentsList =
     quote.comments.length > 0 &&
@@ -56,7 +63,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
           className="flex lg:gap-4 gap-3"
         >
           {quote.likes.length}
-          {liked ? (
+          {tempLike ? (
             <LikeFilled className="lg:w-8 w-6" />
           ) : (
             <LikesIcon className="lg:w-8 w-6" />
@@ -64,6 +71,18 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
         </button>
       </div>
       {commentsList}
+      {tempComment.comment && (
+        <div className="md:mt-6 mt-4 pb-6 border-b border-gray-300 border-opacity-20">
+          <div className="flex gap-4 items-center">
+            <img
+              className="rounded-full md:w-14 md:h-14 w-10 h-10"
+              src={tempComment.image}
+            />
+            <h1 className="text-xl">{tempComment.username}</h1>
+          </div>
+          <p className="lg:pl-7222">{tempComment.comment}</p>
+        </div>
+      )}
 
       <div className="flex items-center gap-6 mt-4 lg:mt-6">
         <img

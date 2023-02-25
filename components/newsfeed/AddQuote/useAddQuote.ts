@@ -39,7 +39,7 @@ export const useAddQuote = () => {
       } else {
         await fetchCSRFToken();
         await createQuote(formData);
-        const quote = await getQuotes(1);
+        const quote = await getQuotes("/api/quote?page=1");
         dispatch(storeQuotes(quote.data));
         back();
       }

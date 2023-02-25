@@ -2,16 +2,20 @@ import { LikeFilled, QuoteIcon } from "components";
 import { useDispatch } from "react-redux";
 import { fetchCSRFToken, markAsRead, me } from "services/axios";
 import { storeUser } from "store";
+import { NotificationsProps } from "types";
 import { calculateTime } from "./helpers";
 import { useNotifications } from "./useNotifications";
 
-const Notifications = () => {
+const Notifications: React.FC<NotificationsProps> = ({ closeModal }) => {
   const { onNotificationClick, t, notifications } = useNotifications();
 
   const list = notifications.reverse().map((n) => {
     return (
       <div
-        onClick={() => onNotificationClick(n)}
+        onClick={() => {
+          onNotificationClick(n);
+          closeModal(false);
+        }}
         className="flex items-center lg:gap-6 gap-4 h-28 border border-gray-300 border-opacity-30 rounded-md
         lg:pl-6 lg:pr-6 p-4 mb-2 lg:mb-4"
         key={`${n.created_at}${n.id}`}

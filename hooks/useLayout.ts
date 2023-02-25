@@ -1,7 +1,9 @@
+import Echo from "laravel-echo";
+
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getGenres, getMovies, me } from "services/axios";
+import { getGenres, getMovies, instance, me } from "services/axios";
 import { storeGenres, storeMovies, storeUser } from "store";
 import { Movie } from "types";
 
@@ -38,6 +40,47 @@ const useLayout = () => {
   useEffect(() => {
     checkAuth();
   }, [router]);
+
+  const updateNotifications = async () => {
+    if (typeof window !== "undefined") {
+      const pusher = require("pusher-js");
+
+      const echo = new Echo({
+        broadcaster: "pusher",
+        key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
+        cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
+        forceTLS: true,
+        authorizer: (channel: { name: string }) => {
+          return {
+            authorize: async (socketId: number, callback: Function) => {
+              try {
+                const response = await instance.post(
+                  `${process.env.NEXT_PUBLIC_API_URL}/api/broadcasting/auth`,
+                  {
+                    socket_id: socketId,
+                    channel_name: channel.name,
+                  }
+                );
+                callback(false, response.data);
+              } catch (error) {
+                callback(true, error);
+              }
+            },
+          };
+        },
+      });
+      echo.private("notification").listen("NotificationCreate", () => {
+        const updateUserInfo = async () => {
+          const response = await me();
+          dispatch(storeUser(response?.data?.user));
+        };
+        updateUserInfo();
+      });
+    }
+  };
+  if (router.pathname === "/news-feed") {
+    updateNotifications();
+  }
 };
 
 export default useLayout;

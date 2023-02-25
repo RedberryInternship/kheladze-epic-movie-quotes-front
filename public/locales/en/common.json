@@ -18,5 +18,6 @@
   "you_sure": "Are You Sure?",
   "cancel": "Cancel",
   "confirm": "Confirm",
-  "search": "Enter @ to search movies, Enter # to search quotes "
+  "search": "Enter @ to search movies, Enter # to search quotes ",
+  "exists": "Email Already Exists"
 }
