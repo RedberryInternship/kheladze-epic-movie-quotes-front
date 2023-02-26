@@ -72,7 +72,7 @@ const MovieInfo = () => {
                 </h1>
                 <h2>{`${shownMovie.budget}$`}</h2>
               </div>
-              <p className="lg:w-528 text-gray-300 text-lg">
+              <p className="lg:w-528 w-full text-gray-300 text-lg">
                 {shownMovie.description[l]}
               </p>
             </div>

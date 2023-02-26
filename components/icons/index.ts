@@ -33,3 +33,6 @@ export { default as ChangePhoto } from "./ChangePhoto";
 export { default as WriteNewQuoteIcon } from "./WriteNewQuoteIcon";
 export { default as LikeFilled } from "./LikeFilled";
 export { default as NotificationPointerIcon } from "./NotificationPointerIcon";
+export { default as Gendalf } from "./Gendalf";
+export { default as Whoops } from "./Whoops";
+export { default as Ellipse } from "./Ellipse";

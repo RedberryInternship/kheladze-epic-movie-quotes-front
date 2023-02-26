@@ -5,7 +5,7 @@ const Sidebar: React.FC<{ user?: string }> = ({ user }) => {
   const { back, query } = useSidebar();
   return (
     <div>
-      <div className="md:hidden block">
+      <div className="xl:hidden block">
         {query.sidebar && (
           <Modal closeModal={back}>
             <ProfileInfo />

@@ -44,3 +44,12 @@ export type QuoteForm = {
   image: string;
   movieId?: number;
 };
+
+export type EmailForm = {
+  email: string;
+};
+
+export type ResetForm = {
+  password: string;
+  password_confirmation: string;
+};

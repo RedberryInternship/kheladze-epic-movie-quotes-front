@@ -61,13 +61,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ singupClick }) => {
             <input type="checkbox" />
             <p>{t("remember")}</p>
           </div>
-          <Link className="underline text-blue-600" href={"#"}>
+          <Link className="underline text-blue-600" href={`/?forgot=password`}>
             {t("forgot_password")}
           </Link>
         </div>
         <RedBtn className="w-full" label={t("singin")} />
         <a
-          href="http://127.0.0.1:8000/api/google/auth"
+          href={`${process.env.NEXT_PUBLIC_API_URL}/api/google/auth`}
           className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md"
         >
           <Google /> {t("google")}

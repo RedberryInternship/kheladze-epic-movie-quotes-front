@@ -1,7 +1,16 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
-import { fetchCSRFToken, googleLogin } from "services/axios";
+import {
+  fetchCSRFToken,
+  googleLogin,
+  resetPassword,
+  sendResetInstructions,
+} from "services/axios";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { emailShema, resetSchema } from "schemas";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { EmailForm, ResetForm } from "types";
 
 const useHome = () => {
   const [LoginModal, setLoginModal] = useState(false);
@@ -20,6 +29,34 @@ const useHome = () => {
   if (query.googleuser) {
     googleAuth();
   }
+  const sendInstructionsForm = useForm<EmailForm>({
+    resolver: yupResolver(emailShema),
+  });
+  const resetForm = useForm<ResetForm>({
+    mode: "all",
+    resolver: yupResolver(resetSchema),
+  });
+  const [emailBackErrors, setEmailBackErrors] = useState("");
+
+  const sendInstructions: SubmitHandler<EmailForm> = async (email) => {
+    try {
+      await fetchCSRFToken();
+      await sendResetInstructions(email);
+      setSingUpModal(false);
+      setLoginModal(false);
+      push("/?instruction=sent");
+    } catch (error: any) {
+      setEmailBackErrors(error.response.data.message);
+    }
+  };
+
+  const resetPasswordSubmit: SubmitHandler<ResetForm> = async (formData) => {
+    try {
+      await fetchCSRFToken();
+      await resetPassword({ ...formData, reset_token: query.reset });
+      push("/?password_updated=1");
+    } catch (error) {}
+  };
 
   return {
     LoginModal,
@@ -30,10 +67,14 @@ const useHome = () => {
     setCheckEmailModal,
     toMail,
     setToMail,
-    locale,
     query,
     push,
     t,
+    sendInstructionsForm,
+    resetForm,
+    emailBackErrors,
+    sendInstructions,
+    resetPasswordSubmit,
   };
 };
 
