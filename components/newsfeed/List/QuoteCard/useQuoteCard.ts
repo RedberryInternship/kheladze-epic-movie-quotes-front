@@ -57,7 +57,6 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
   const liked = quote.likes.some(
     (like) => Number(like.user_id) === loggedInUser.id
   );
-
   const [tempLike, setTempLike] = useState(liked);
 
   const like = async (data: any) => {
@@ -84,5 +83,6 @@ export const useQuoteCard = (quote: Quote, loggedInUser: User) => {
     like,
     tempLike,
     tempComment,
+    liked,
   };
 };

@@ -43,15 +43,17 @@ export const useQuoteModal = () => {
       image: "",
     };
   } else if (query.quote === "edit") {
-    useEffect(() => {
-      setCurrentImage(currentQuote?.image);
-    }, []);
     defaultValues = {
       quote_en: currentQuote?.quote.en,
       quote_ka: currentQuote?.quote.ka,
       image: currentQuote?.image,
     };
   }
+  useEffect(() => {
+    if (query.quote === "edit") {
+      setCurrentImage(currentQuote?.image);
+    }
+  }, []);
 
   const {
     register,

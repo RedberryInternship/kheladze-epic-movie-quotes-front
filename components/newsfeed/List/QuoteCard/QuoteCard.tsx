@@ -11,6 +11,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
     like,
     tempLike,
     tempComment,
+    liked,
   } = useQuoteCard(quote, loggedInUser);
 
   const commentsList =
@@ -53,17 +54,17 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
           <CommentsIcon className="lg:w-8 w-6" />
         </button>
         <button
-          onClick={() =>
+          onClick={() => {
             like({
               quoteId: quote.id,
               recieverId: quote.movies.users?.id,
               userId: loggedInUser.id,
-            })
-          }
+            });
+          }}
           className="flex lg:gap-4 gap-3"
         >
           {quote.likes.length}
-          {tempLike ? (
+          {liked || tempLike ? (
             <LikeFilled className="lg:w-8 w-6" />
           ) : (
             <LikesIcon className="lg:w-8 w-6" />
