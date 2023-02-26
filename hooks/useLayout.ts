@@ -2,9 +2,9 @@ import Echo from "laravel-echo";
 
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getGenres, getMovies, instance, me } from "services/axios";
-import { storeGenres, storeMovies, storeUser } from "store";
+import { RootState, storeGenres, storeMovies, storeUser } from "store";
 import { Movie } from "types";
 
 const useLayout = () => {
@@ -40,7 +40,7 @@ const useLayout = () => {
   useEffect(() => {
     checkAuth();
   }, [router]);
-
+  const user = useSelector((store: RootState) => store.user.user);
   const updateNotifications = async () => {
     if (typeof window !== "undefined") {
       const pusher = require("pusher-js");
@@ -69,16 +69,19 @@ const useLayout = () => {
           };
         },
       });
-      echo.private("notification").listen("NotificationCreate", () => {
-        const updateUserInfo = async () => {
-          const response = await me();
-          dispatch(storeUser(response?.data?.user));
-        };
-        updateUserInfo();
-      });
+
+      echo
+        .private("notification." + user.id)
+        .listen("NotificationCreate", (data: Notification) => {
+          const updateUserInfo = async () => {
+            const response = await me();
+            dispatch(storeUser(response?.data?.user));
+          };
+          updateUserInfo();
+        });
     }
   };
-  if (router.pathname === "/news-feed") {
+  if (router.pathname === "/news-feed" && user.id) {
     updateNotifications();
   }
 };

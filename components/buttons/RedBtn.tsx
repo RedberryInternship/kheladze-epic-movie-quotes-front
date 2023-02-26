@@ -18,6 +18,7 @@ const RedBtn: React.FC<RedBtnProps> = ({
         <a
           href={`https://${link}`}
           target="_blank"
+          rel="noreferrer"
           className="absolute w-full h-full opacity-0 left-0 top-0 bg-green-500"
         >
           linki

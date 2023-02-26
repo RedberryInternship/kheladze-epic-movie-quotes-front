@@ -24,9 +24,7 @@ export const useAddMovieModal = () => {
 
   if (query.movie) {
     const shownMovie = movies.find((movie) => movie.id === Number(query.movie));
-    useEffect(() => {
-      setCurrentImage(shownMovie?.image);
-    }, []);
+    setCurrentImage(shownMovie?.image);
     defaultValues = {
       name_en: shownMovie?.name.en,
       name_ka: shownMovie?.name.ka,

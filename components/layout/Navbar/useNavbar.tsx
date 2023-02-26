@@ -54,7 +54,7 @@ export const useNavbar = () => {
     if (!openSearch) {
       dispatch(storeSearchTerm(""));
     }
-  }, [openSearch]);
+  }, [openSearch, dispatch]);
   return {
     t,
     router,

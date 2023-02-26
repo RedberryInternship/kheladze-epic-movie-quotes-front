@@ -3,6 +3,8 @@
   "rules": {
     "react/no-unescaped-entities":0,
     "@next/next/no-page-custom-font": "off",
-    "no-unescaped-entities": "off"
+    "no-unescaped-entities": "off",
+    "next/image-uses-webp": "off",
+    "jsx-a11y/alt-text": "off" 
   }
 }
