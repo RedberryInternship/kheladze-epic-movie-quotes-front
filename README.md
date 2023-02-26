@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div style="display:flex; align-items: center">
+  <h1 style="position:relative; top: -6px" >Epic Movie Quotes</h1>
+</div>
 
-## Getting Started
+---
 
-First, run the development server:
+Epic Movie Quotes is an application of movies and quotes. Verified user can add own movies and quotes. also see quotes from other users.
 
-```bash
-npm run dev
-# or
-yarn dev
+#
+
+### Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+
+#
+
+### prerequisites
+
+- <img src="/readme/assets/node.png" width="35" style="position: relative; top: 4px" /> Node JS @12.X and up
+- <img src="/readme/assets/npm.png" width="35" style="position: relative; top: 4px" /> npm @6 and up
+
+#
+
+### Tech Stack
+
+- <img src="/readme/assets/next.png" height="18" style="position: relative; top: 4px" /> [Next.js](https://nextjs.org/) - front-end framework
+- <img src="/readme/assets/framer.png" height="18" style="position: relative; top: 4px; width: 18px" /> [Framer-Motion](https://www.framer.com/) - Animation tool
+- <img src="/readme/assets/axios.png" height="18" style="position: relative; top: 4px; width: 18px" /> [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client for the browser and node.js
+- <img src="/readme/assets/form.png" height="18" style="position: relative; top: 4px; width: 18px" /> [React Hook Form](https://react-hook-form.com/) - validation package
+- <img src="/readme/assets/i18next.png" height="18" style="position: relative; top: 4px; width: 18px" /> [i18Next](https://www.i18next.com/) - internationalization-framework written in and for JavaScript
+- <img src="/readme/assets/redux.png" height="18" style="position: relative; top: 4px; width: 18px" /> [Redux Toolkit](https://redux-toolkit.js.org/) - state management tool
+- <img src="/readme/assets/scroll.png" height="18" style="position: relative; top: 4px; width: 18px" /> [React infinite scroll component](https://www.npmjs.com/package/react-infinite-scroll-component) - scrolling tool
+
+#
+
+### Getting Started
+
+1\. First of all you need to clone Epic Movie Quotes from github:
+
+```sh
+git@github.com:RedberryInternship/kheladze-epic-movie-quotes-front.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2\. Next step requires install all the dependencies
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+or
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```sh
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+and then
 
-## Learn More
+```sh
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+##### Now, you should be good to go!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
 
-## Deploy on Vercel
+├─── components
+├───├─── Component
+├───├───├─── Component.tsx
+├───├───├─── useComponent.ts
+├───├───├─── index.ts
+├───├─── index.ts
+├─── hooks
+├───├─── index.ts
+├───├─── useGlobalHook.ts
+├─── pages
+├───├─── index.ts
+├───├─── page.tsx
+├─── public
+├───├─── locales
+├───├───├─── en
+├───├───├─── ka
+├─── schemas
+├───├─── index.ts
+├───├─── schema.ts
+├─── services
+├───├─── axios.ts
+├─── store
+├───├─── index.ts
+├───├─── store.ts
+├───├─── slice.ts
+├─── styles
+├─── types
+├─── package-lock.json
+├─── package.json
+├─── next.config.json
+├─── tsconfig.json
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
