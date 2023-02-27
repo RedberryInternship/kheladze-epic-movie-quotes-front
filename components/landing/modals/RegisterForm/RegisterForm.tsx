@@ -82,14 +82,17 @@ const RegisterForm: React.FC<RegisterProps> = ({
             <input type="checkbox" />
             <p>{t("remember")}</p>
           </div>
-          <Link className="underline text-blue-600" href={"#"}>
+          <Link className="underline text-blue-600" href={`/?forgot=password`}>
             {t("forgot_password")}
           </Link>
         </div>
         <RedBtn className="w-360" label={t("get_started")} />
-        <button className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md">
+        <a
+          href={`${process.env.NEXT_PUBLIC_API_URL}/api/google/auth`}
+          className="w-full flex justify-center gap-2 items-center h-10 border border-white rounded-md"
+        >
           <Google /> {t("google")}
-        </button>
+        </a>
       </form>
       <div className="mt-4">
         {t("already_have")}

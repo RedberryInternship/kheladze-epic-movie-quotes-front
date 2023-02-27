@@ -145,3 +145,13 @@ export const readNotification = async (data: any) => {
   const response = await instance.post("/api/notification/read", data);
   return response;
 };
+
+export const sendResetInstructions = async (data: any) => {
+  const response = await instance.post("/api/send/instructions", data);
+  return response;
+};
+
+export const resetPassword = async (data: any) => {
+  const response = await instance.post("/api/password/reset", data);
+  return response;
+};

@@ -8,11 +8,14 @@ import {
   LoginForm,
   CheckedActivated,
   Sent,
+  LeftArrow,
+  Input,
 } from "components";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, NextPage } from "next";
 import useHome from "hooks/useHome";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const {
@@ -27,6 +30,11 @@ const Home: NextPage = () => {
     query,
     push,
     t,
+    sendInstructionsForm,
+    resetForm,
+    emailBackErrors,
+    sendInstructions,
+    resetPasswordSubmit,
   } = useHome();
 
   return (
@@ -40,7 +48,110 @@ const Home: NextPage = () => {
           login: t("login"),
         }}
       />
-      {singUpModal && (
+      {query.forgot && (
+        <ModalWrapper
+          className="gap-6 lg:w-601 lg:h-400 w-screen h-screen text-white flex flex-col items-center justify-center"
+          closeModal={() => push("/")}
+        >
+          <h1 className=" text-3xl font-medium">{t("forgot_password")}</h1>
+          <p className="text-gray-500 w-360 text-center">{t("instructions")}</p>
+          <form
+            className="w-360"
+            onSubmit={sendInstructionsForm.handleSubmit(sendInstructions)}
+          >
+            <Input
+              name="email"
+              className="h-10"
+              label={t("email")}
+              register={sendInstructionsForm.register("email")}
+              type="email"
+              error={sendInstructionsForm.formState.errors.email}
+              backErr={emailBackErrors}
+            />
+            <RedBtn className="w-full mt-6" label={t("send_instructions")} />
+          </form>
+          <Link className="flex items-center gap-2" href={"/"}>
+            <LeftArrow />
+            <span className="text-gray-400">{t("back_to_log")}</span>
+          </Link>
+        </ModalWrapper>
+      )}
+      {query.instruction === "sent" && (
+        <ModalWrapper
+          className="gap-6 lg:w-601 lg:h-400 w-screen h-screen text-white flex flex-col items-center justify-center"
+          closeModal={() => push("/")}
+        >
+          <Sent />
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {t("check")}
+          </h1>
+          <h3 className="text-white w-2/3 text-center">
+            {t("instructions_sent")}
+          </h3>
+          <RedBtn
+            link={"gmail.com"}
+            className="w-full"
+            label={t("go_to_mail")}
+          />
+        </ModalWrapper>
+      )}
+      {query.reset && (
+        <ModalWrapper
+          className="gap-6 lg:w-601 lg:h-471 w-screen h-screen text-white flex flex-col items-center justify-center"
+          closeModal={() => push("/")}
+        >
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {t("create_new_password")}
+          </h1>
+          <p className="text-gray-500 w-360 text-center">
+            {t("prev_must_be_different")}
+          </p>
+          <form
+            className="w-360 flex flex-col gap-6"
+            onSubmit={resetForm.handleSubmit(resetPasswordSubmit)}
+          >
+            <Input
+              name="password"
+              className="h-10"
+              label={t("password")}
+              register={resetForm.register("password")}
+              type="password"
+              error={resetForm.formState.errors.password}
+            />
+            <Input
+              name="password_confirmation"
+              className="h-10"
+              label={t("password_confirmation")}
+              register={resetForm.register("password_confirmation")}
+              type="password"
+              error={resetForm.formState.errors.password_confirmation}
+            />
+            <RedBtn className="w-full" label={t("reset_pass")} />
+          </form>
+        </ModalWrapper>
+      )}
+      {query.password_updated && (
+        <ModalWrapper
+          className="h-96 w-360 flex flex-col items-center justify-center pt-14 pb-14 gap-8"
+          closeModal={() => push("/")}
+        >
+          <CheckedActivated />
+          <h1 className="text-white text-2xl md:text-3xl font-medium">
+            {t("success")}
+          </h1>
+          <h3 className="text-white">{t("success_message")}</h3>
+          <RedBtn
+            click={() => {
+              push("/");
+              setLoginModal(true);
+            }}
+            className="w-48 md:w-360"
+            label={t("login")}
+          />
+        </ModalWrapper>
+      )}
+
+      {singUpModal && !query.forgot && (
         <ModalWrapper
           className="md:h-704 h-screen w-screen"
           closeModal={() => setSingUpModal(false)}
@@ -59,7 +170,7 @@ const Home: NextPage = () => {
           />
         </ModalWrapper>
       )}
-      {LoginModal && (
+      {LoginModal && !query.forgot && (
         <ModalWrapper
           className="md:h-704 h-screen w-screen"
           closeModal={() => setLoginModal(false)}

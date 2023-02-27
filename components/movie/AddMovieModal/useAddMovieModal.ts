@@ -21,10 +21,13 @@ export const useAddMovieModal = () => {
   );
 
   let defaultValues = {};
-
+  const shownMovie = movies.find((movie) => movie.id === Number(query.movie));
+  useEffect(() => {
+    if (query.movie) {
+      setCurrentImage(shownMovie?.image);
+    }
+  }, []);
   if (query.movie) {
-    const shownMovie = movies.find((movie) => movie.id === Number(query.movie));
-    setCurrentImage(shownMovie?.image);
     defaultValues = {
       name_en: shownMovie?.name.en,
       name_ka: shownMovie?.name.ka,

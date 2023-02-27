@@ -19,5 +19,20 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "search": "Enter @ to search movies, Enter # to search quotes ",
-  "exists": "Email Already Exists"
+  "exists": "Email Already Exists",
+  "back_to_log": "Back to log in",
+  "send_instructions": "Send instructions",
+  "forgot_password": "Forgot password?",
+  "instructions": "Enter the email and we will send an email with instructions to reset your password",
+  "check": "Check your email",
+  "instructions_sent": "We have sent a password recover instructions to your email",
+  "skip": "Skip, I will confirm later",
+  "create_new_password": "Create new password",
+  "prev_must_be_different": "Your new password must be different from previous used passwords",
+  "reset_pass": "Reset password",
+  "email": "Email",
+  "password": "Password",
+  "password_confirmation": "Confirm Password",
+  "success": "Success",
+  "success_message": "Your Password changed successfully"
 }

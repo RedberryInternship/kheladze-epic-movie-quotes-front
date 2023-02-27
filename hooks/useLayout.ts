@@ -33,7 +33,7 @@ const useLayout = () => {
       }
     } catch (error) {
       if (router.pathname !== "/") {
-        router.push("/");
+        router.push("/401");
       }
     }
   };
