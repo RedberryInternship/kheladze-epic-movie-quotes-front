@@ -77,7 +77,7 @@ const Navbar = () => {
             initial={{ width: 0 }}
             animate={{ width: "100%" }}
             transition={{ duration: 0.4 }}
-            className="w-screen right-0 top-0 h-704 z-40 flex flex-col fixed bg-zinc-800"
+            className="w-screen right-0 top-0 h-750 z-40 flex flex-col fixed bg-zinc-800"
           >
             <div className="w-full flex gap-7 items-center p-8 h-16 border-b border-gray-300 border-opacity-20">
               <button onClick={() => setOpenSearch(false)}>
@@ -104,7 +104,7 @@ const Navbar = () => {
       )}
       {openNotifications && (
         <>
-          <div className="rounded-xl lg:w-961 pt-5 lg:pt-10 pl-8 pr-8 lg:pb-14 pb-9 overflow-scroll w-screen lg:right-14 right-0 top-24 lg:h-704 h-471 z-40 flex flex-col fixed bg-black">
+          <div className="rounded-xl lg:w-961 pt-5 lg:pt-10 pl-8 pr-8 lg:pb-14 pb-9 overflow-scroll w-screen lg:right-14 right-0 top-24 lg:h-812 h-750 z-40 flex flex-col fixed bg-black">
             <Notifications closeModal={setOpenNotifications} />
           </div>
           <div

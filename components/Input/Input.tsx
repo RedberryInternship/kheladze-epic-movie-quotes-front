@@ -54,16 +54,19 @@ const Input: React.FC<InputProps> = ({
         {...register}
       />
 
-      {showError && pathname !== "/movies" && pathname !== "/news-feed" && (
-        <>
-          <ErrorInput
-            className={`${pathname === "/profile" ? "top-12 right-9" : ""}`}
-          />
-          <p className={`absolute text-sm -bottom-3 text-red-500`}>
-            {error?.message}
-          </p>
-        </>
-      )}
+      {!backErr &&
+        showError &&
+        pathname !== "/movies" &&
+        pathname !== "/news-feed" && (
+          <>
+            <ErrorInput
+              className={`${pathname === "/profile" ? "top-12 right-9" : ""}`}
+            />
+            <p className={`absolute text-sm -bottom-3 text-red-500`}>
+              {error?.message}
+            </p>
+          </>
+        )}
       {backErr && (
         <p className="absolute text-sm -bottom-3 text-red-500">{backErr}</p>
       )}

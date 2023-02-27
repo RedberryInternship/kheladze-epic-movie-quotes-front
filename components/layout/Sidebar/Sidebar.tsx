@@ -12,7 +12,7 @@ const Sidebar = () => {
           </Modal>
         )}
       </div>
-      <div className="hidden md:block fixed left-0 top-20">
+      <div className="hidden xl:block fixed left-0 top-20">
         <ProfileInfo />
       </div>
     </div>

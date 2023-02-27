@@ -31,9 +31,9 @@ const MovieInfo = () => {
       {shownMovie?.description && (
         <>
           <div className="flex lg:flex-row items-start flex-col">
-            <div className="flex justify-center items-center lg:w-809 w-full h-96 lg:h-441 lg:mr-6 mb-6">
+            <div className="flex items-center lg:w-809 w-full h-96 lg:h-441 lg:mr-6 mb-6">
               <img
-                className="rounded-xl lg:max-w-full lg:max-h-full h-full"
+                className="rounded-xl max-w-full max-h-full w-full"
                 src={shownMovie.image}
               />
             </div>

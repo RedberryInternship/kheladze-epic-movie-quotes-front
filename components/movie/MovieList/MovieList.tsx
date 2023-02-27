@@ -13,13 +13,11 @@ const MovieList = () => {
             className="flex flex-col justify-between md:w-428 w-360 h-400 md:h-471"
             key={movie.id}
           >
-            <div className="h-3/4 flex">
-              <img
-                className="rounded-xl h-full max-w-full max-h-full"
-                src={movie.image}
-                onClick={() => push(`${pathname}?movie=${movie.id}`)}
-              />
-            </div>
+            <img
+              className="rounded-xl max-w-full max-h-full"
+              src={movie.image}
+              onClick={() => push(`${pathname}?movie=${movie.id}`)}
+            />
             <h2 className="text-2xl font-medium">{movie.name[l]}</h2>
             <h3 className="flex gap-3 items-center">
               {movie.quotes.length} <QuoteIcon />
