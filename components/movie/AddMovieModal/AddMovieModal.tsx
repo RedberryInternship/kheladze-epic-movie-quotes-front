@@ -64,7 +64,7 @@ const AddMovieModal = () => {
         </button>
       ))
     ) : (
-      <p>{t("genres")}</p>
+      <p className="text-gray-400">{t("genres")}</p>
     );
 
   return (
@@ -93,7 +93,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="Movie Name"
             name="name_en"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("name_en")}
             languageLabel="Eng"
             error={errors.name_en}
@@ -102,7 +102,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="ფილმის სახელი"
             name="name_ka"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("name_ka")}
             languageLabel="ქარ"
             error={errors.name_ka}
@@ -111,7 +111,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="Director"
             name="director_en"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("director_en")}
             languageLabel="Eng"
             error={errors.director_en}
@@ -120,7 +120,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="რეჟისორი"
             name="director_ka"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("director_ka")}
             languageLabel="ქარ"
             error={errors.director_ka}
@@ -151,7 +151,7 @@ const AddMovieModal = () => {
             type="number"
             placeholder={t("budget")}
             name="budget"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("budget")}
             languageLabel="ქარ"
             error={errors.budget}
@@ -160,7 +160,7 @@ const AddMovieModal = () => {
             type="number"
             placeholder={t("year")}
             name="year"
-            className="w-full h-12 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-12 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("year")}
             languageLabel="ქარ"
             error={errors.year}
@@ -169,7 +169,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="Movie Description"
             name="description_en"
-            className="w-full h-20 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-20 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("description_en")}
             languageLabel="Eng"
             error={errors.description_en}
@@ -178,7 +178,7 @@ const AddMovieModal = () => {
             type="text"
             placeholder="ფილმის აღწერა"
             name="description_ka"
-            className="w-full h-20 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
+            className="w-full h-20 bg-inherit text-white placeholder:text-gray-400 md:mb-5 mb-4"
             register={register("description_ka")}
             languageLabel="ქარ"
             error={errors.description_ka}
@@ -194,7 +194,10 @@ const AddMovieModal = () => {
               <label className="md:block hidden" htmlFor="movie_image">
                 {t("drag_drop")}
               </label>
-              <label className="md:hidden block " htmlFor="movie_image">
+              <label
+                className="md:hidden block text-gray-400"
+                htmlFor="movie_image"
+              >
                 {t("upload_image")}
               </label>
               <label
