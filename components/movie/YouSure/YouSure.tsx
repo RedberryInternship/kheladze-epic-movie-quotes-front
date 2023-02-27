@@ -1,10 +1,8 @@
-import { Backdrop, RedBtn } from "components";
+import { RedBtn } from "components";
 import { useTranslation } from "next-i18next";
+import { YouSureProps } from "types";
 
-const YouSure: React.FC<{ close: () => void; confirm: () => void }> = ({
-  close,
-  confirm,
-}) => {
+const YouSure: React.FC<YouSureProps> = ({ close, confirm }) => {
   const { t } = useTranslation("common");
   return (
     <>

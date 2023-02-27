@@ -10,11 +10,7 @@ const ProfileInfo = () => {
       <div className="flex items-center gap-5">
         <img
           className="w-10 md:w-16 h-10 md:h-16 rounded-full"
-          src={
-            user.image
-              ? user.image
-              : "https://i.pinimg.com/236x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg"
-          }
+          src={user.image?.includes("users") ? user.image : "/person.png"}
         />
         <div>
           <h1 className="text-xl">{user.name}</h1>

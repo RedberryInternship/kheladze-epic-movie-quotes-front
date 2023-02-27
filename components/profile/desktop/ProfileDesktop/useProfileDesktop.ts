@@ -15,7 +15,7 @@ import {
 } from "services/axios";
 
 export const useProfileDesktop = () => {
-  const { route, query, asPath, push } = useRouter();
+  const { route, query, push } = useRouter();
   const { t } = useTranslation("profile");
   const { user } = useSelector((store: RootState) => store?.user);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -72,7 +72,8 @@ export const useProfileDesktop = () => {
   };
   const userImage = () => {
     if (currentImage) return currentImage;
-    if (user.image) return user.image;
+    if (user.image?.includes("users")) return user.image;
+    return "/person.png";
   };
   const passwordValidator = () => {
     const fill = passwordForm.formState.errors.password ? "#9C9A9A" : "#198754";

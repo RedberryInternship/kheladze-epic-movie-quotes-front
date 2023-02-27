@@ -1,7 +1,7 @@
 import { Modal, ProfileInfo } from "components";
 import { useSidebar } from "./useSidebar";
 
-const Sidebar: React.FC<{ user?: string }> = ({ user }) => {
+const Sidebar = () => {
   const { back, query } = useSidebar();
   return (
     <div>
