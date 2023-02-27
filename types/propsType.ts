@@ -115,3 +115,15 @@ export type QuoteCardProps = { quote: Quote; loggedInUser: User };
 export type NotificationsProps = {
   closeModal: Dispatch<SetStateAction<boolean>>;
 };
+
+export type SureProps = { confirm: any };
+
+export type BackdropProps = { click?: () => void };
+
+export type LangDropdownProps = { className: string };
+
+export type LayoutProps = { children: React.ReactNode };
+
+export type QuoteListProps = { quotes: Quote[] };
+
+export type YouSureProps = { close: () => void; confirm: () => void };

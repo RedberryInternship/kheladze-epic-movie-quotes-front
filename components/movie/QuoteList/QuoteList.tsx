@@ -7,10 +7,10 @@ import {
   ViewQuote,
 } from "components";
 
-import { Quote } from "types";
+import { QuoteListProps } from "types";
 import { useQuoteList } from "./useQuoteList";
 
-const QuoteList: React.FC<{ quotes: Quote[] }> = ({ quotes }) => {
+const QuoteList: React.FC<QuoteListProps> = ({ quotes }) => {
   const { t, l, push, asPath, query } = useQuoteList();
 
   const list = quotes.map((quote) => (

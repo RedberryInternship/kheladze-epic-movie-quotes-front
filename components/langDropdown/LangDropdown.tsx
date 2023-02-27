@@ -1,9 +1,10 @@
 import { LangArrow } from "components";
 
 import Dropdown from "react-dropdown";
+import { LangDropdownProps } from "types";
 import { useLangDropdown } from "./useLangDropdown";
 
-const LangDropdown: React.FC<{ className: string }> = ({ className }) => {
+const LangDropdown: React.FC<LangDropdownProps> = ({ className }) => {
   const { router } = useLangDropdown();
   return (
     <div

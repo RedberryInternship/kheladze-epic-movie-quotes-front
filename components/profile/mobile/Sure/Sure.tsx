@@ -1,7 +1,8 @@
 import { Backdrop, RedBtn } from "components";
+import { SureProps } from "types";
 import { useSure } from "./useSure";
 
-const Sure: React.FC<{ confirm: any }> = ({ confirm }) => {
+const Sure: React.FC<SureProps> = ({ confirm }) => {
   const { t, back } = useSure();
 
   return (

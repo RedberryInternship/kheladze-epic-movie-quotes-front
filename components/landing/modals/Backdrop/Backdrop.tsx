@@ -1,4 +1,6 @@
-const Backdrop: React.FC<{ click?: () => void }> = ({ click }) => {
+import { BackdropProps } from "types";
+
+const Backdrop: React.FC<BackdropProps> = ({ click }) => {
   return (
     <div
       onClick={click}
