@@ -7,7 +7,7 @@ const ReadOnly: React.FC<ReadOnlyProps> = ({
   className,
 }) => {
   return (
-    <div className="mb-2">
+    <div className="mb-2 pt-4">
       <p className="h-8">{label}</p>
       <div
         className={`${className} w-528 flex justify-between items-center rounded-md h-12 pl-5 p-3`}

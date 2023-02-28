@@ -50,7 +50,7 @@ const Home: NextPage = () => {
       />
       {query.forgot && (
         <ModalWrapper
-          className="gap-6 lg:w-601 lg:h-400 w-screen h-screen text-white flex flex-col items-center justify-center"
+          className="gap-6 lg:w-601 lg:h-400 w-screen h-screen text-white flex flex-col items-center md:justify-center md:pt-0 pt-28"
           closeModal={() => push("/")}
         >
           <h1 className=" text-3xl font-medium">{t("forgot_password")}</h1>
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
           </h3>
           <RedBtn
             link={"gmail.com"}
-            className="w-full"
+            className="w-360"
             label={t("go_to_mail")}
           />
         </ModalWrapper>
@@ -261,6 +261,9 @@ const Home: NextPage = () => {
         quote={t("rings")}
         movie={t("rings_name")}
       />
+      <div className="lg:pl-16 pl-8 bg-inherit h-11 flex items-center lg:text-sm text-xs text-orangeWhite font-medium">
+        © 2022 movie quotes. All rights reserved.
+      </div>
     </div>
   );
 };
