@@ -34,6 +34,12 @@ const useProfile = () => {
       push("/profile?success=1");
     } catch (error) {}
   };
+  const [currentImage, setCurrentImage] = useState(null);
+  const userImage = () => {
+    if (currentImage) return currentImage;
+    if (user.image?.includes("users")) return user.image;
+    return "/person.png";
+  };
 
   return {
     uploadImage,
@@ -52,6 +58,8 @@ const useProfile = () => {
     setShowSuccess,
     image,
     setImage,
+    setCurrentImage,
+    userImage,
   };
 };
 

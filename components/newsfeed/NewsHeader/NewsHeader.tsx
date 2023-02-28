@@ -5,6 +5,7 @@ import { useNewsHeader } from "./useNewsHeader";
 const NewsHeader = () => {
   const { t, pathname, setInputVal, searching, setSearching, onSearchSubmit } =
     useNewsHeader();
+  const placeholder = t("search");
 
   return (
     <div className="mt-8 mb-6 md:text-xl pr-4 flex items-center gap-7 justify-between w-full xl:w-1000 lg:w-601">
@@ -22,7 +23,7 @@ const NewsHeader = () => {
           <form className="w-full" onSubmit={onSearchSubmit}>
             <input
               onChange={(e) => setInputVal(e.target.value)}
-              placeholder="Enter @ to search movies, Enter # to search quotes"
+              placeholder={placeholder}
               className="w-full h-10 bg-inherit border-b border-gray-300 border-opacity-30 focus:outline-none"
               type="text"
             />

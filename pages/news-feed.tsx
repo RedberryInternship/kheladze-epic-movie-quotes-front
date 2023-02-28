@@ -7,7 +7,7 @@ const News: NextPage = () => {
   const { query } = useRouter();
   return (
     <Layout>
-      <div className="w-full h-full mt-24 flex flex-col items-center lg:pl-80">
+      <div className="w-full h-full mt-24 flex flex-col items-center">
         <NewsHeader />
         <List />
         {query.add === "quote" && <AddQuote />}

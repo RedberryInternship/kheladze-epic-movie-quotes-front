@@ -20,8 +20,8 @@ const MovieHeader = () => {
       <div className="text-2xl font-medium">
         <h1>{t("my_list")}</h1>
         <h3 className="md:text-2xl text-base">
-          ({t("total")}
-          {movies.length})
+          <span>({t("total")} </span>
+          <span> {movies.length})</span>
         </h3>
       </div>
       {searching && (

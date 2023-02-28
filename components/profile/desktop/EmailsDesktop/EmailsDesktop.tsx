@@ -87,7 +87,7 @@ const EmailsDesktop: React.FC<EmailsProps> = ({ user }) => {
           <Link
             href={`/profile?modify=email`}
             className={`border rounded-md ${
-              locale === "en" ? "w-48" : "w-96"
+              locale === "en" ? "w-52" : "w-96"
             }  text-xl h-12 p-4 flex gap-2 items-center justify-start`}
           >
             <Plus /> {t("add_new_mail")}
