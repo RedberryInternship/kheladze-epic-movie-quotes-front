@@ -42,7 +42,11 @@ const AddQuote = () => {
         <div className="flex items-center gap-4 mb-4 mt-8">
           <img
             className="md:w-14 w-10 h-10 md:h-14 rounded-full"
-            src={user.image && user.image}
+            src={
+              user.image.includes("users") || user.google_id
+                ? user.image
+                : "/person.png"
+            }
           />
           <p>{user.name}</p>
         </div>

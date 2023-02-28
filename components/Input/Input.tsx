@@ -47,7 +47,9 @@ const Input: React.FC<InputProps> = ({
         } rounded-md  h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
         ${isDirty && !showError && "border-green-700 focus:border-green-700"} 
-        ${pathname !== "/movies" && "bg-gray-300 "} `}
+        ${
+          pathname !== "/movies" && pathname !== "/news-feed" && "bg-gray-300 "
+        } `}
         id={name}
         type={toggle}
         placeholder={placeholder ? placeholder : ""}
