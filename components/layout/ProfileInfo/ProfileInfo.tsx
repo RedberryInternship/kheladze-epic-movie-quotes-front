@@ -3,14 +3,14 @@ import Link from "next/link";
 import { useProfileInfo } from "./useProfileInfo";
 
 const ProfileInfo = () => {
-  const { t, user, pathname } = useProfileInfo();
+  const { t, user, pathname, userImage } = useProfileInfo();
 
   return (
     <div className="flex flex-col gap-10 text-white ml-11 mt-10">
       <div className="flex items-center gap-5">
         <img
           className="w-10 md:w-16 h-10 md:h-16 rounded-full"
-          src={user.image?.includes("users") ? user.image : "/person.png"}
+          src={userImage()}
         />
         <div>
           <h1 className="text-xl">{user.name}</h1>

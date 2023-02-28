@@ -22,7 +22,11 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
           <div className="flex gap-4 items-center">
             <img
               className="rounded-full md:w-14 md:h-14 w-10 h-10"
-              src={comment.user.image}
+              src={
+                comment.user.image.includes("users") || comment.user.google_id
+                  ? comment.user.image
+                  : "/person.png"
+              }
             />
             <h1 className="text-xl">{comment.user.name}</h1>
           </div>
@@ -36,7 +40,12 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
       <div className="flex items-center gap-4 mb-4">
         <img
           className="md:w-14 w-10 h-10 md:h-14 rounded-full"
-          src={quote.movies.users?.image && quote.movies.users?.image}
+          src={
+            quote.movies.users?.image.includes("users") ||
+            quote.movies.users?.google_id
+              ? quote.movies.users?.image
+              : "/person.png"
+          }
         />
         <p>{quote.movies.users?.name}</p>
       </div>
@@ -88,7 +97,11 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loggedInUser }) => {
       <div className="flex items-center gap-6 mt-4 lg:mt-6">
         <img
           className="rounded-full md:w-14 md:h-14 w-10 h-10"
-          src={loggedInUser.image}
+          src={
+            loggedInUser?.image?.includes("users") || loggedInUser?.google_id
+              ? loggedInUser.image
+              : "/person.png"
+          }
         />
         <form onSubmit={onCommentSubmit} className="w-full">
           <input

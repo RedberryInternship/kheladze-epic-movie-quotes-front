@@ -44,10 +44,10 @@ const Input: React.FC<InputProps> = ({
       <input
         className={`${className} focus:outline-none focus:ring-1 focus:border-blue-300 border box-border ${
           pathname !== "/movies" && pathname !== "/news-feed" && "text-gray-800"
-        } rounded-md bg-gray-300 h-9 pl-5 placeholder:text-gray-500 
+        } rounded-md  h-9 pl-5 placeholder:text-gray-500 
         ${showError && "border-red-600 focus:border-red-600"} 
         ${isDirty && !showError && "border-green-700 focus:border-green-700"} 
-        `}
+        ${pathname !== "/movies" && "bg-gray-300 "} `}
         id={name}
         type={toggle}
         placeholder={placeholder ? placeholder : ""}

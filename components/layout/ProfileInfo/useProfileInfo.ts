@@ -7,5 +7,9 @@ export const useProfileInfo = () => {
   const { t } = useTranslation("newsfeed");
   const { pathname } = useRouter();
   const { user } = useSelector((store: RootState) => store?.user);
-  return { t, user, pathname };
+  const userImage = () => {
+    if (user.image?.includes("users") || user.google_id) return user.image;
+    return "/person.png";
+  };
+  return { t, user, pathname, userImage };
 };

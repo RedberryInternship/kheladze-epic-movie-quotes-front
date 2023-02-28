@@ -67,7 +67,11 @@ const QuoteModal = () => {
             <div className="flex gap-4 items-center">
               <img
                 className="rounded-full md:w-14 md:h-14 w-10 h-10"
-                src={user.image}
+                src={
+                  user.image.includes("users") || user.google_id
+                    ? user.image
+                    : "/person.png"
+                }
               />
               <h1 className="text-xl">{user.name}</h1>
             </div>
