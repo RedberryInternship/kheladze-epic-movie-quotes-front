@@ -12,7 +12,7 @@ export const registerValidationSchema = Yup.object({
     .required("სავალდებულო"),
   password_confirmation: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Passwords must match"
+    "პაროლი უნდა ემთხვეოდეს"
   ),
 });
 
@@ -39,7 +39,7 @@ export const passwordValidation = Yup.object({
     .required("სავალდებულო"),
   password_confirmation: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Passwords must match"
+    "პაროლი უნდა ემთხვეოდეს"
   ),
 });
 
@@ -80,6 +80,6 @@ export const resetSchema = Yup.object({
     .required("სავალდებულო"),
   password_confirmation: Yup.string().oneOf(
     [Yup.ref("password"), null],
-    "Passwords must match"
+    "პაროლი უნდა ემთხვეოდეს"
   ),
 });
