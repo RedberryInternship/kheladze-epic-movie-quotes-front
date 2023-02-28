@@ -19,5 +19,5 @@ export const useNotifications = () => {
     push(`/movies?movie=${quote?.movie_id}&viewquote=${quote?.id}`);
   };
 
-  return { push, quotes, t, notifications, onNotificationClick };
+  return { onNotificationClick, t, notifications, user };
 };
