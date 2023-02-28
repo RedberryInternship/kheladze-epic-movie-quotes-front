@@ -136,8 +136,8 @@ export const googleLogin = async (data: any) => {
   return response;
 };
 
-export const markAsRead = async () => {
-  const response = await instance.post("/api/notification");
+export const markAsRead = async (userId: number) => {
+  const response = await instance.post("/api/notification", userId);
   return response;
 };
 

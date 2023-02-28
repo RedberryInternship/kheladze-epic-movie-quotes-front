@@ -7,7 +7,7 @@ import { calculateTime } from "./helpers";
 import { useNotifications } from "./useNotifications";
 
 const Notifications: React.FC<NotificationsProps> = ({ closeModal }) => {
-  const { onNotificationClick, t, notifications } = useNotifications();
+  const { onNotificationClick, t, notifications, user } = useNotifications();
 
   const list = notifications.reverse().map((n) => {
     return (
@@ -55,7 +55,7 @@ const Notifications: React.FC<NotificationsProps> = ({ closeModal }) => {
   const markAllAsRead = async () => {
     try {
       await fetchCSRFToken();
-      await markAsRead();
+      await markAsRead(user.id);
       const response = await me();
       dispatch(storeUser(response.data.user));
     } catch (error) {}
