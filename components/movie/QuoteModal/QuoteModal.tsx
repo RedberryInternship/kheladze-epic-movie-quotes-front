@@ -105,7 +105,7 @@ const QuoteModal = () => {
             name="quote_ka"
             className="w-full h-20 bg-inherit text-white placeholder:text-white md:mb-5 mb-4"
             register={register("quote_ka")}
-            languageLabel="Eng"
+            languageLabel="GEO"
             error={errors.quote_ka}
           />
           {query.quote === "add" && (

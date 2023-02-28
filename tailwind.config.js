@@ -20,6 +20,9 @@ module.exports = {
       zIndex: {
         60: 60,
       },
+      backgroundColor: {
+        modalColor: "#222030",
+      },
       width: {
         601: "37.5625rem",
         360: "22.5rem",
@@ -46,6 +49,7 @@ module.exports = {
         367: "22.938rem",
         812: "50.75rem",
         750: "46.875rem",
+        562: "35.125rem",
       },
     },
   },

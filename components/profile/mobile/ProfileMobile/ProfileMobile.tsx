@@ -11,7 +11,17 @@ import Link from "next/link";
 import { useProfile } from "hooks";
 
 const ProfileMobile = () => {
-  const { route, query, t, user, setImage, push, uploadImage } = useProfile();
+  const {
+    route,
+    query,
+    t,
+    user,
+    setImage,
+    push,
+    uploadImage,
+    setCurrentImage,
+    userImage,
+  } = useProfile();
   const googleUser = user.google_id;
 
   return (
@@ -26,7 +36,7 @@ const ProfileMobile = () => {
           <div className="w-full pl-8 pr-8 bg-zinc-800 rounded-xl flex flex-col items-center">
             <img
               className="w-40 h-40 rounded-full mb-2 mt-10"
-              src={user.image && user.image}
+              src={userImage()}
             />
             <form className="mb-14">
               <label
@@ -40,6 +50,10 @@ const ProfileMobile = () => {
                 id="userImage"
                 className="hidden"
                 onChange={(e: any) => {
+                  const createObjectURL = (file: File): any => {
+                    return URL.createObjectURL(file);
+                  };
+                  setCurrentImage(createObjectURL(e.currentTarget.files[0]));
                   setImage(e.target.files[0]);
                 }}
                 type="file"

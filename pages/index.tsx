@@ -153,7 +153,7 @@ const Home: NextPage = () => {
 
       {singUpModal && !query.forgot && (
         <ModalWrapper
-          className="md:h-704 h-screen w-screen"
+          className="md:h-750 h-screen w-screen"
           closeModal={() => setSingUpModal(false)}
         >
           <Close click={() => setSingUpModal(false)} />
@@ -172,7 +172,7 @@ const Home: NextPage = () => {
       )}
       {LoginModal && !query.forgot && (
         <ModalWrapper
-          className="md:h-704 h-screen w-screen"
+          className="md:h-562 h-screen w-screen"
           closeModal={() => setLoginModal(false)}
         >
           <Close click={() => setLoginModal(false)} />
