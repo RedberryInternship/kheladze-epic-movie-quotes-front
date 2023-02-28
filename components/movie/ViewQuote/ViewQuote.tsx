@@ -55,8 +55,13 @@ const ViewQuote = () => {
           <div className="flex gap-4 items-center">
             <img
               className="rounded-full md:w-14 md:h-14 w-10 h-10"
-              src={user.image}
+              src={
+                user.image.includes("users") || user.google_id
+                  ? user.image
+                  : "/person.png"
+              }
             />
+
             <h1 className="text-xl">{user.name}</h1>
           </div>
           <div className="flex items-center justify-between p-3 w-full border border-gray-500 border-opacity-70 rounded-md">
@@ -100,7 +105,12 @@ const ViewQuote = () => {
                 <div className="flex gap-4 items-center">
                   <img
                     className="rounded-full md:w-14 md:h-14 w-10 h-10"
-                    src={comment.user.image}
+                    src={
+                      comment.user.image.includes("users") ||
+                      comment.user.google_id
+                        ? comment.user.image
+                        : "/person.png"
+                    }
                   />
                   <h1 className="text-xl">{comment.user.name}</h1>
                 </div>
@@ -111,7 +121,11 @@ const ViewQuote = () => {
           <div className="w-full items-center flex gap-4">
             <img
               className="rounded-full md:w-14 md:h-14 w-10 h-10"
-              src={user.image}
+              src={
+                user.image.includes("users") || user.google_id
+                  ? user.image
+                  : "/person.png"
+              }
             />
             <form onSubmit={onCommentSubmit} className="w-full">
               <input

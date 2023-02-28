@@ -82,9 +82,9 @@ const AddMovieModal = () => {
             <img
               className="md:w-14 w-10 h-10 md:h-14 rounded-full"
               src={
-                user.image
+                user.image.includes("users") || user.google_id
                   ? user.image
-                  : "https://i.pinimg.com/236x/5f/40/6a/5f406ab25e8942cbe0da6485afd26b71.jpg"
+                  : "/person.png"
               }
             />
             <p>{user.name}</p>

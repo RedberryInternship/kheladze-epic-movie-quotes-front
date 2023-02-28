@@ -23,7 +23,11 @@ const Notifications: React.FC<NotificationsProps> = ({ closeModal }) => {
         <div className="h-full flex flex-col items-center justify-between">
           <img
             className="rounded-full self-start lg:w-20 w-14 lg:h-20 h-14"
-            src={n.writer.image}
+            src={
+              n.writer.image.includes("users") || n.writer?.google_id
+                ? n.writer.image
+                : "/person.png"
+            }
           />
           {n.is_new === 1 && (
             <p className="text-green-700 lg:hidden block">New</p>
